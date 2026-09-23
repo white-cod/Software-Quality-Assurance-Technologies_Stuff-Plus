@@ -3,7 +3,7 @@
 > **Продукт (з Каталогу):** П3, «Персонал+» — система управління персоналом, HRM (slug: `personal`)  
 > **Спринт:** Підготовчий (Kick-off) та діючий на Спринт 1  
 > **Дата:** 12.09.2026  
-> **Репозиторій:** [https://github.com/white-cod/TZAPS-PersonalPlus](https://github.com/white-cod/TZAPS-PersonalPlus)  
+> **Репозиторій:** [white-cod/Software-Quality-Assurance-Technologies_Stuff-Plus](white-cod/Software-Quality-Assurance-Technologies_Stuff-Plus)  
 > **Автори:** Шпилька Т., Коломоєць О., Любочка В., Мініцька А.
 
 ---
