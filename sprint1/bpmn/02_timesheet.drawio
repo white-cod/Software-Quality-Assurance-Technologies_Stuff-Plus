@@ -1,489 +1,160 @@
-<mxfile host="app.diagrams.net" pages="2">
-  <diagram name="Страница-1" id="lBUm9K8F-5mpGSFjGjgm">
-    <mxGraphModel dx="2020" dy="1061" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0">
+  <diagram id="model2-timesheet" name="Модель 2: Облік робочого часу (табель)">
+    <mxGraphModel dx="1914" dy="993" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1650" pageHeight="780" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <UserObject label="" mermaidData="{&#xa;  &quot;data&quot;: &quot;flowchart LR\n    subgraph Lane_Employee [\&quot;Працівник\&quot;]\n        Start_LeaveNeed((\&quot;Виникла потреба&lt;br/&gt;у відпустці\&quot;))\n        Task_SelectDates[\&quot;Обрати вид та дати&lt;br/&gt;відпустки\&quot;]\n        Task_SubmitRequest[\&quot;Подати заявку&lt;br/&gt;на відпустку\&quot;]\n        End_Approved(((\&quot;Відпустку&lt;br/&gt;погоджено\&quot;)))\n    end\n\n    subgraph Lane_Lead [\&quot;Керівник підрозділу\&quot;]\n        Task_ReviewRequest[\&quot;Розглянути заявку&lt;br/&gt;на відпустку\&quot;]\n        Timer_Escalate((\&quot;3 робочі дні&lt;br/&gt;без відповіді\&quot;))\n        Gateway_ManagerDecision{\&quot;Рішення&lt;br/&gt;керівника?\&quot;}\n        Task_RejectComment[\&quot;Вказати причину&lt;br/&gt;відхилення\&quot;]\n        End_Rejected(((\&quot;Відпустку&lt;br/&gt;відхилено\&quot;)))\n    end\n\n    subgraph Lane_HR [\&quot;HR-менеджер\&quot;]\n        Task_HREscalation[\&quot;Ескалаційне погодження&lt;br/&gt;HR-менеджером\&quot;]\n    end\n\n    subgraph Lane_System [\&quot;Система\&quot;]\n        SubProcess_CalcWorkDays[[\&quot;Розрахунок робочих днів&lt;br/&gt;(без свят і вихідних)\&quot;]]\n        Task_CheckBalance[\&quot;Перевірити доступний&lt;br/&gt;баланс\&quot;]\n        Gateway_BalanceCheck{\&quot;Баланс&lt;br/&gt;достатній?\&quot;}\n        Task_NotifyDeficit[\&quot;Надіслати сповіщення&lt;br/&gt;про дефіцит днів\&quot;]\n        End_Deficit(((\&quot;Заявку відхилено&lt;br/&gt;системою (дефіцит днів)\&quot;)))\n        Task_NotifyManager[\&quot;Зареєструвати та&lt;br/&gt;сповістити керівника\&quot;]\n        Task_DeductDays[\&quot;Списати дні з балансу&lt;br/&gt;працівника\&quot;]\n        Task_UpdateCalendar[\&quot;Внести запис у&lt;br/&gt;календар команди\&quot;]\n        Task_NotifyApproval[\&quot;Сповістити працівника&lt;br/&gt;про погодження\&quot;]\n    end\n\n    %% Потоки процесу\n    Start_LeaveNeed --&gt; Task_SelectDates\n    Task_SelectDates --&gt; Task_SubmitRequest\n    Task_SubmitRequest --&gt; SubProcess_CalcWorkDays\n    SubProcess_CalcWorkDays --&gt; Task_CheckBalance\n    Task_CheckBalance --&gt; Gateway_BalanceCheck\n    \n    Gateway_BalanceCheck --&gt;|\&quot;Ні, дефіцит днів\&quot;| Task_NotifyDeficit\n    Task_NotifyDeficit --&gt; End_Deficit\n    \n    Gateway_BalanceCheck --&gt;|\&quot;Так, баланс ≥ днів\&quot;| Task_NotifyManager\n    Task_NotifyManager --&gt; Task_ReviewRequest\n    \n    Task_ReviewRequest --&gt; Gateway_ManagerDecision\n    Task_ReviewRequest -.-&gt; Timer_Escalate\n    Timer_Escalate --&gt; Task_HREscalation\n    Task_HREscalation --&gt; Gateway_ManagerDecision\n    \n    Gateway_ManagerDecision --&gt;|\&quot;Відхилити\&quot;| Task_RejectComment\n    Task_RejectComment --&gt; End_Rejected\n    \n    Gateway_ManagerDecision --&gt;|\&quot;Погодити\&quot;| Task_DeductDays\n    Task_DeductDays --&gt; Task_UpdateCalendar\n    Task_UpdateCalendar --&gt; Task_NotifyApproval\n    Task_NotifyApproval --&gt; End_Approved\n&quot;,&#xa;  &quot;config&quot;: null&#xa;}" id="qpS-h8bxV_ccQJgN57QS-1">
-          <mxCell connectable="0" parent="1" style="group;transparentBounds=1;editIcon=1;lockedGroup=0;groupPadding=10;" vertex="1">
-            <mxGeometry as="geometry" />
-          </mxCell>
-        </UserObject>
-        <UserObject label="Працівник" mermaidId="n:Lane_Employee" mermaidBaseStyle="html=1;whiteSpace=wrap;strokeWidth=1;verticalAlign=top;fillColor=light-dark(#ffffde,#1f2020);strokeColor=light-dark(#aaaa33,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" mermaidBaseValue="Працівник" id="qpS-h8bxV_ccQJgN57QS-2">
-          <mxCell parent="qpS-h8bxV_ccQJgN57QS-1" style="html=1;whiteSpace=wrap;strokeWidth=1;verticalAlign=top;fillColor=light-dark(#ffffde,#1f2020);strokeColor=light-dark(#aaaa33,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" vertex="1">
-            <mxGeometry height="226" width="3970" x="30" y="851" as="geometry" />
-          </mxCell>
-        </UserObject>
-        <UserObject label="Виникла потреба&#xa;у відпустці" mermaidId="n:Start_LeaveNeed" mermaidBaseStyle="ellipse;html=1;aspect=fixed;strokeWidth=1;whiteSpace=wrap;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" mermaidBaseValue="Виникла потреба&#xa;у відпустці" id="qpS-h8bxV_ccQJgN57QS-3">
-          <mxCell parent="qpS-h8bxV_ccQJgN57QS-2" style="ellipse;html=1;aspect=fixed;strokeWidth=1;whiteSpace=wrap;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" vertex="1">
-            <mxGeometry height="156" width="156" x="35" y="45" as="geometry" />
-          </mxCell>
-        </UserObject>
-        <UserObject label="Обрати вид та дати&#xa;відпустки" mermaidId="n:Task_SelectDates" mermaidBaseStyle="html=1;whiteSpace=wrap;strokeWidth=1;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" mermaidBaseValue="Обрати вид та дати&#xa;відпустки" id="qpS-h8bxV_ccQJgN57QS-4">
-          <mxCell parent="qpS-h8bxV_ccQJgN57QS-2" style="html=1;whiteSpace=wrap;strokeWidth=1;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" vertex="1">
-            <mxGeometry height="73" width="204" x="241" y="86" as="geometry" />
-          </mxCell>
-        </UserObject>
-        <UserObject label="Подати заявку&#xa;на відпустку" mermaidId="n:Task_SubmitRequest" mermaidBaseStyle="html=1;whiteSpace=wrap;strokeWidth=1;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" mermaidBaseValue="Подати заявку&#xa;на відпустку" id="qpS-h8bxV_ccQJgN57QS-5">
-          <mxCell parent="qpS-h8bxV_ccQJgN57QS-2" style="html=1;whiteSpace=wrap;strokeWidth=1;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" vertex="1">
-            <mxGeometry height="73" width="166" x="495" y="86" as="geometry" />
-          </mxCell>
-        </UserObject>
-        <UserObject label="Відпустку&#xa;погоджено" mermaidId="n:End_Approved" mermaidBaseStyle="ellipse;html=1;shape=doubleEllipse;aspect=fixed;strokeWidth=1;whiteSpace=wrap;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" mermaidBaseValue="Відпустку&#xa;погоджено" id="qpS-h8bxV_ccQJgN57QS-6">
-          <mxCell parent="qpS-h8bxV_ccQJgN57QS-2" style="ellipse;html=1;shape=doubleEllipse;aspect=fixed;strokeWidth=1;whiteSpace=wrap;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" vertex="1">
-            <mxGeometry height="120" width="120" x="3815" y="63" as="geometry" />
-          </mxCell>
-        </UserObject>
-        <UserObject label="" mermaidId="e:Start_LeaveNeed-&gt;Task_SelectDates#0" mermaidBaseStyle="curved=1;startArrow=none;endArrow=block;endSize=7;strokeColor=light-dark(#333333,#cccccc);exitX=1;exitY=0.5;entryX=0;entryY=0.51;" mermaidBaseValue="" id="qpS-h8bxV_ccQJgN57QS-7">
-          <mxCell edge="1" parent="qpS-h8bxV_ccQJgN57QS-2" source="qpS-h8bxV_ccQJgN57QS-3" style="curved=1;startArrow=none;endArrow=block;endSize=7;strokeColor=light-dark(#333333,#cccccc);exitX=1;exitY=0.5;entryX=0;entryY=0.51;rounded=0;" target="qpS-h8bxV_ccQJgN57QS-4">
-            <mxGeometry relative="1" as="geometry">
-              <Array as="points" />
-            </mxGeometry>
-          </mxCell>
-        </UserObject>
-        <UserObject label="" mermaidId="e:Task_SelectDates-&gt;Task_SubmitRequest#0" mermaidBaseStyle="curved=1;startArrow=none;endArrow=block;endSize=7;strokeColor=light-dark(#333333,#cccccc);exitX=1;exitY=0.51;entryX=0;entryY=0.51;" mermaidBaseValue="" id="qpS-h8bxV_ccQJgN57QS-8">
-          <mxCell edge="1" parent="qpS-h8bxV_ccQJgN57QS-2" source="qpS-h8bxV_ccQJgN57QS-4" style="curved=1;startArrow=none;endArrow=block;endSize=7;strokeColor=light-dark(#333333,#cccccc);exitX=1;exitY=0.51;entryX=0;entryY=0.51;rounded=0;" target="qpS-h8bxV_ccQJgN57QS-5">
-            <mxGeometry relative="1" as="geometry">
-              <Array as="points" />
-            </mxGeometry>
-          </mxCell>
-        </UserObject>
-        <UserObject label="Керівник підрозділу" mermaidId="n:Lane_Lead" mermaidBaseStyle="html=1;whiteSpace=wrap;strokeWidth=1;verticalAlign=top;fillColor=light-dark(#ffffde,#1f2020);strokeColor=light-dark(#aaaa33,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" mermaidBaseValue="Керівник підрозділу" id="qpS-h8bxV_ccQJgN57QS-9">
-          <mxCell parent="qpS-h8bxV_ccQJgN57QS-1" style="html=1;whiteSpace=wrap;strokeWidth=1;verticalAlign=top;fillColor=light-dark(#ffffde,#1f2020);strokeColor=light-dark(#aaaa33,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" vertex="1">
-            <mxGeometry height="259" width="1547" x="1914" y="409" as="geometry" />
-          </mxCell>
-        </UserObject>
-        <UserObject label="Розглянути заявку&#xa;на відпустку" mermaidId="n:Task_ReviewRequest" mermaidBaseStyle="html=1;whiteSpace=wrap;strokeWidth=1;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" mermaidBaseValue="Розглянути заявку&#xa;на відпустку" id="qpS-h8bxV_ccQJgN57QS-10">
-          <mxCell parent="qpS-h8bxV_ccQJgN57QS-9" style="html=1;whiteSpace=wrap;strokeWidth=1;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" vertex="1">
-            <mxGeometry height="73" width="196" x="35" y="85" as="geometry" />
-          </mxCell>
-        </UserObject>
-        <UserObject label="3 робочі дні&#xa;без відповіді" mermaidId="n:Timer_Escalate" mermaidBaseStyle="ellipse;html=1;aspect=fixed;strokeWidth=1;whiteSpace=wrap;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" mermaidBaseValue="3 робочі дні&#xa;без відповіді" id="qpS-h8bxV_ccQJgN57QS-11">
-          <mxCell parent="qpS-h8bxV_ccQJgN57QS-9" style="ellipse;html=1;aspect=fixed;strokeWidth=1;whiteSpace=wrap;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" vertex="1">
-            <mxGeometry height="126" width="126" x="295" y="108" as="geometry" />
-          </mxCell>
-        </UserObject>
-        <UserObject label="Рішення&#xa;керівника?" mermaidId="n:Gateway_ManagerDecision" mermaidBaseStyle="rhombus;html=1;strokeWidth=1;whiteSpace=wrap;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" mermaidBaseValue="Рішення&#xa;керівника?" id="qpS-h8bxV_ccQJgN57QS-12">
-          <mxCell parent="qpS-h8bxV_ccQJgN57QS-9" style="rhombus;html=1;strokeWidth=1;whiteSpace=wrap;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" vertex="1">
-            <mxGeometry height="142" width="142" x="815" y="45" as="geometry" />
-          </mxCell>
-        </UserObject>
-        <UserObject label="Вказати причину&#xa;відхилення" mermaidId="n:Task_RejectComment" mermaidBaseStyle="html=1;whiteSpace=wrap;strokeWidth=1;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" mermaidBaseValue="Вказати причину&#xa;відхилення" id="qpS-h8bxV_ccQJgN57QS-13">
-          <mxCell parent="qpS-h8bxV_ccQJgN57QS-9" style="html=1;whiteSpace=wrap;strokeWidth=1;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" vertex="1">
-            <mxGeometry height="73" width="184" x="1102" y="131" as="geometry" />
-          </mxCell>
-        </UserObject>
-        <UserObject label="Відпустку&#xa;відхилено" mermaidId="n:End_Rejected" mermaidBaseStyle="ellipse;html=1;shape=doubleEllipse;aspect=fixed;strokeWidth=1;whiteSpace=wrap;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" mermaidBaseValue="Відпустку&#xa;відхилено" id="qpS-h8bxV_ccQJgN57QS-14">
-          <mxCell parent="qpS-h8bxV_ccQJgN57QS-9" style="ellipse;html=1;shape=doubleEllipse;aspect=fixed;strokeWidth=1;whiteSpace=wrap;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" vertex="1">
-            <mxGeometry height="115" width="115" x="1397" y="110" as="geometry" />
-          </mxCell>
-        </UserObject>
-        <UserObject label="" mermaidId="e:Task_ReviewRequest-&gt;Gateway_ManagerDecision#0" mermaidBaseStyle="curved=1;startArrow=none;endArrow=block;endSize=7;strokeColor=light-dark(#333333,#cccccc);exitX=1;exitY=0.03;entryX=0;entryY=0.27;" mermaidBaseValue="" id="qpS-h8bxV_ccQJgN57QS-15">
-          <mxCell edge="1" parent="qpS-h8bxV_ccQJgN57QS-9" source="qpS-h8bxV_ccQJgN57QS-10" style="curved=1;startArrow=none;endArrow=block;endSize=7;strokeColor=light-dark(#333333,#cccccc);exitX=1;exitY=0.03;entryX=0;entryY=0.27;rounded=0;" target="qpS-h8bxV_ccQJgN57QS-12">
-            <mxGeometry relative="1" as="geometry">
-              <Array as="points">
-                <mxPoint x="270" y="73" />
-                <mxPoint x="358" y="73" />
-                <mxPoint x="446" y="73" />
-                <mxPoint x="471" y="73" />
-                <mxPoint x="618" y="73" />
-                <mxPoint x="765" y="73" />
-                <mxPoint x="790" y="73" />
-              </Array>
-            </mxGeometry>
-          </mxCell>
-        </UserObject>
-        <UserObject label="" mermaidId="e:Task_ReviewRequest-&gt;Timer_Escalate#0" mermaidBaseStyle="curved=1;dashed=1;dashPattern=2 3;fixDash=1;startArrow=none;endArrow=block;endSize=7;strokeColor=light-dark(#333333,#cccccc);exitX=1;exitY=0.99;entryX=0;entryY=0.5;" mermaidBaseValue="" id="qpS-h8bxV_ccQJgN57QS-16">
-          <mxCell edge="1" parent="qpS-h8bxV_ccQJgN57QS-9" source="qpS-h8bxV_ccQJgN57QS-10" style="curved=1;dashed=1;dashPattern=2 3;fixDash=1;startArrow=none;endArrow=block;endSize=7;strokeColor=light-dark(#333333,#cccccc);exitX=1;exitY=0.99;entryX=0;entryY=0.5;rounded=0;" target="qpS-h8bxV_ccQJgN57QS-11">
-            <mxGeometry relative="1" as="geometry">
-              <Array as="points">
-                <mxPoint x="270" y="171" />
-              </Array>
-            </mxGeometry>
-          </mxCell>
-        </UserObject>
-        <UserObject label="Відхилити" mermaidId="e:Gateway_ManagerDecision-&gt;Task_RejectComment#0" mermaidBaseStyle="curved=1;startArrow=none;endArrow=block;endSize=7;strokeColor=light-dark(#333333,#cccccc);html=1;fontSize=16;labelBackgroundColor=light-dark(#E8E8E88D,#2a2a2a8D);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);exitX=1;exitY=0.69;entryX=0;entryY=0.51;" mermaidBaseValue="Відхилити" id="qpS-h8bxV_ccQJgN57QS-17">
-          <mxCell edge="1" parent="qpS-h8bxV_ccQJgN57QS-9" source="qpS-h8bxV_ccQJgN57QS-12" style="curved=1;startArrow=none;endArrow=block;endSize=7;strokeColor=light-dark(#333333,#cccccc);html=1;fontSize=16;labelBackgroundColor=light-dark(#E8E8E88D,#2a2a2a8D);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);exitX=1;exitY=0.69;entryX=0;entryY=0.51;rounded=0;" target="qpS-h8bxV_ccQJgN57QS-13">
-            <mxGeometry relative="1" as="geometry">
-              <Array as="points">
-                <mxPoint x="1020" y="168" />
-              </Array>
-            </mxGeometry>
-          </mxCell>
-        </UserObject>
-        <UserObject label="" mermaidId="e:Task_RejectComment-&gt;End_Rejected#0" mermaidBaseStyle="curved=1;startArrow=none;endArrow=block;endSize=7;strokeColor=light-dark(#333333,#cccccc);exitX=1;exitY=0.51;entryX=0;entryY=0.5;" mermaidBaseValue="" id="qpS-h8bxV_ccQJgN57QS-18">
-          <mxCell edge="1" parent="qpS-h8bxV_ccQJgN57QS-9" source="qpS-h8bxV_ccQJgN57QS-13" style="curved=1;startArrow=none;endArrow=block;endSize=7;strokeColor=light-dark(#333333,#cccccc);exitX=1;exitY=0.51;entryX=0;entryY=0.5;rounded=0;" target="qpS-h8bxV_ccQJgN57QS-14">
-            <mxGeometry relative="1" as="geometry">
-              <Array as="points" />
-            </mxGeometry>
-          </mxCell>
-        </UserObject>
-        <UserObject label="HR-менеджер" mermaidId="n:Lane_HR" mermaidBaseStyle="html=1;whiteSpace=wrap;strokeWidth=1;verticalAlign=top;fillColor=light-dark(#ffffde,#1f2020);strokeColor=light-dark(#aaaa33,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" mermaidBaseValue="HR-менеджер" id="qpS-h8bxV_ccQJgN57QS-19">
-          <mxCell parent="qpS-h8bxV_ccQJgN57QS-1" style="html=1;whiteSpace=wrap;strokeWidth=1;verticalAlign=top;fillColor=light-dark(#ffffde,#1f2020);strokeColor=light-dark(#aaaa33,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" vertex="1">
-            <mxGeometry height="143" width="314" x="2375" y="688" as="geometry" />
-          </mxCell>
-        </UserObject>
-        <UserObject label="Ескалаційне погодження&#xa;HR-менеджером" mermaidId="n:Task_HREscalation" mermaidBaseStyle="html=1;whiteSpace=wrap;strokeWidth=1;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" mermaidBaseValue="Ескалаційне погодження&#xa;HR-менеджером" id="qpS-h8bxV_ccQJgN57QS-20">
-          <mxCell parent="qpS-h8bxV_ccQJgN57QS-19" style="html=1;whiteSpace=wrap;strokeWidth=1;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" vertex="1">
-            <mxGeometry height="73" width="244" x="35" y="45" as="geometry" />
-          </mxCell>
-        </UserObject>
-        <UserObject label="Система" mermaidId="n:Lane_System" mermaidBaseStyle="html=1;whiteSpace=wrap;strokeWidth=1;verticalAlign=top;fillColor=light-dark(#ffffde,#1f2020);strokeColor=light-dark(#aaaa33,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" mermaidBaseValue="Система" id="qpS-h8bxV_ccQJgN57QS-21">
-          <mxCell parent="qpS-h8bxV_ccQJgN57QS-1" style="html=1;whiteSpace=wrap;strokeWidth=1;verticalAlign=top;fillColor=light-dark(#ffffde,#1f2020);strokeColor=light-dark(#aaaa33,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" vertex="1">
-            <mxGeometry height="342" width="3074" x="730" y="60" as="geometry" />
-          </mxCell>
-        </UserObject>
-        <UserObject label="Розрахунок робочих днів&#xa;(без свят і вихідних)" mermaidId="n:SubProcess_CalcWorkDays" mermaidBaseStyle="html=1;strokeWidth=1;shape=process;whiteSpace=wrap;size=0.04;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" mermaidBaseValue="Розрахунок робочих днів&#xa;(без свят і вихідних)" id="qpS-h8bxV_ccQJgN57QS-22">
-          <mxCell parent="qpS-h8bxV_ccQJgN57QS-21" style="html=1;strokeWidth=1;shape=process;whiteSpace=wrap;size=0.04;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" vertex="1">
-            <mxGeometry height="53" width="217" x="35" y="193" as="geometry" />
-          </mxCell>
-        </UserObject>
-        <UserObject label="Перевірити доступний&#xa;баланс" mermaidId="n:Task_CheckBalance" mermaidBaseStyle="html=1;whiteSpace=wrap;strokeWidth=1;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" mermaidBaseValue="Перевірити доступний&#xa;баланс" id="qpS-h8bxV_ccQJgN57QS-23">
-          <mxCell parent="qpS-h8bxV_ccQJgN57QS-21" style="html=1;whiteSpace=wrap;strokeWidth=1;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" vertex="1">
-            <mxGeometry height="73" width="226" x="302" y="183" as="geometry" />
-          </mxCell>
-        </UserObject>
-        <UserObject label="Баланс&#xa;достатній?" mermaidId="n:Gateway_BalanceCheck" mermaidBaseStyle="rhombus;html=1;strokeWidth=1;whiteSpace=wrap;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" mermaidBaseValue="Баланс&#xa;достатній?" id="qpS-h8bxV_ccQJgN57QS-24">
-          <mxCell parent="qpS-h8bxV_ccQJgN57QS-21" style="rhombus;html=1;strokeWidth=1;whiteSpace=wrap;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" vertex="1">
-            <mxGeometry height="139" width="139" x="578" y="149" as="geometry" />
-          </mxCell>
-        </UserObject>
-        <UserObject label="Надіслати сповіщення&#xa;про дефіцит днів" mermaidId="n:Task_NotifyDeficit" mermaidBaseStyle="html=1;whiteSpace=wrap;strokeWidth=1;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" mermaidBaseValue="Надіслати сповіщення&#xa;про дефіцит днів" id="qpS-h8bxV_ccQJgN57QS-25">
-          <mxCell parent="qpS-h8bxV_ccQJgN57QS-21" style="html=1;whiteSpace=wrap;strokeWidth=1;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" vertex="1">
-            <mxGeometry height="73" width="224" x="904" y="121" as="geometry" />
-          </mxCell>
-        </UserObject>
-        <UserObject label="Заявку відхилено&#xa;системою (дефіцит днів)" mermaidId="n:End_Deficit" mermaidBaseStyle="ellipse;html=1;shape=doubleEllipse;aspect=fixed;strokeWidth=1;whiteSpace=wrap;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" mermaidBaseValue="Заявку відхилено&#xa;системою (дефіцит днів)" id="qpS-h8bxV_ccQJgN57QS-26">
-          <mxCell parent="qpS-h8bxV_ccQJgN57QS-21" style="ellipse;html=1;shape=doubleEllipse;aspect=fixed;strokeWidth=1;whiteSpace=wrap;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" vertex="1">
-            <mxGeometry height="225" width="225" x="1203" y="45" as="geometry" />
-          </mxCell>
-        </UserObject>
-        <UserObject label="Зареєструвати та&#xa;сповістити керівника" mermaidId="n:Task_NotifyManager" mermaidBaseStyle="html=1;whiteSpace=wrap;strokeWidth=1;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" mermaidBaseValue="Зареєструвати та&#xa;сповістити керівника" id="qpS-h8bxV_ccQJgN57QS-27">
-          <mxCell parent="qpS-h8bxV_ccQJgN57QS-21" style="html=1;whiteSpace=wrap;strokeWidth=1;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" vertex="1">
-            <mxGeometry height="73" width="217" x="908" y="244" as="geometry" />
-          </mxCell>
-        </UserObject>
-        <UserObject label="Списати дні з балансу&#xa;працівника" mermaidId="n:Task_DeductDays" mermaidBaseStyle="html=1;whiteSpace=wrap;strokeWidth=1;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" mermaidBaseValue="Списати дні з балансу&#xa;працівника" id="qpS-h8bxV_ccQJgN57QS-28">
-          <mxCell parent="qpS-h8bxV_ccQJgN57QS-21" style="html=1;whiteSpace=wrap;strokeWidth=1;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" vertex="1">
-            <mxGeometry height="73" width="223" x="2266" y="145" as="geometry" />
-          </mxCell>
-        </UserObject>
-        <UserObject label="Внести запис у&#xa;календар команди" mermaidId="n:Task_UpdateCalendar" mermaidBaseStyle="html=1;whiteSpace=wrap;strokeWidth=1;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" mermaidBaseValue="Внести запис у&#xa;календар команди" id="qpS-h8bxV_ccQJgN57QS-29">
-          <mxCell parent="qpS-h8bxV_ccQJgN57QS-21" style="html=1;whiteSpace=wrap;strokeWidth=1;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" vertex="1">
-            <mxGeometry height="73" width="198" x="2539" y="145" as="geometry" />
-          </mxCell>
-        </UserObject>
-        <UserObject label="Сповістити працівника&#xa;про погодження" mermaidId="n:Task_NotifyApproval" mermaidBaseStyle="html=1;whiteSpace=wrap;strokeWidth=1;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" mermaidBaseValue="Сповістити працівника&#xa;про погодження" id="qpS-h8bxV_ccQJgN57QS-30">
-          <mxCell parent="qpS-h8bxV_ccQJgN57QS-21" style="html=1;whiteSpace=wrap;strokeWidth=1;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" vertex="1">
-            <mxGeometry height="73" width="227" x="2812" y="145" as="geometry" />
-          </mxCell>
-        </UserObject>
-        <UserObject label="" mermaidId="e:SubProcess_CalcWorkDays-&gt;Task_CheckBalance#0" mermaidBaseStyle="curved=1;startArrow=none;endArrow=block;endSize=7;strokeColor=light-dark(#333333,#cccccc);exitX=1;exitY=0.49;entryX=0;entryY=0.49;" mermaidBaseValue="" id="qpS-h8bxV_ccQJgN57QS-31">
-          <mxCell edge="1" parent="qpS-h8bxV_ccQJgN57QS-21" source="qpS-h8bxV_ccQJgN57QS-22" style="curved=1;startArrow=none;endArrow=block;endSize=7;strokeColor=light-dark(#333333,#cccccc);exitX=1;exitY=0.49;entryX=0;entryY=0.49;rounded=0;" target="qpS-h8bxV_ccQJgN57QS-23">
-            <mxGeometry relative="1" as="geometry">
-              <Array as="points" />
-            </mxGeometry>
-          </mxCell>
-        </UserObject>
-        <UserObject label="" mermaidId="e:Task_CheckBalance-&gt;Gateway_BalanceCheck#0" mermaidBaseStyle="curved=1;startArrow=none;endArrow=block;endSize=7;strokeColor=light-dark(#333333,#cccccc);exitX=1;exitY=0.49;entryX=0;entryY=0.5;" mermaidBaseValue="" id="qpS-h8bxV_ccQJgN57QS-32">
-          <mxCell edge="1" parent="qpS-h8bxV_ccQJgN57QS-21" source="qpS-h8bxV_ccQJgN57QS-23" style="curved=1;startArrow=none;endArrow=block;endSize=7;strokeColor=light-dark(#333333,#cccccc);exitX=1;exitY=0.49;entryX=0;entryY=0.5;rounded=0;" target="qpS-h8bxV_ccQJgN57QS-24">
-            <mxGeometry relative="1" as="geometry">
-              <Array as="points" />
-            </mxGeometry>
-          </mxCell>
-        </UserObject>
-        <UserObject label="Ні, дефіцит днів" mermaidId="e:Gateway_BalanceCheck-&gt;Task_NotifyDeficit#0" mermaidBaseStyle="curved=1;startArrow=none;endArrow=block;endSize=7;strokeColor=light-dark(#333333,#cccccc);html=1;fontSize=16;labelBackgroundColor=light-dark(#E8E8E88D,#2a2a2a8D);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);exitX=1;exitY=0.32;entryX=0;entryY=0.51;" mermaidBaseValue="Ні, дефіцит днів" id="qpS-h8bxV_ccQJgN57QS-33">
-          <mxCell edge="1" parent="qpS-h8bxV_ccQJgN57QS-21" source="qpS-h8bxV_ccQJgN57QS-24" style="curved=1;startArrow=none;endArrow=block;endSize=7;strokeColor=light-dark(#333333,#cccccc);html=1;fontSize=16;labelBackgroundColor=light-dark(#E8E8E88D,#2a2a2a8D);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);exitX=1;exitY=0.32;entryX=0;entryY=0.51;rounded=0;" target="qpS-h8bxV_ccQJgN57QS-25">
-            <mxGeometry relative="1" as="geometry">
-              <Array as="points">
-                <mxPoint x="811" y="158" />
-              </Array>
-            </mxGeometry>
-          </mxCell>
-        </UserObject>
-        <UserObject label="" mermaidId="e:Task_NotifyDeficit-&gt;End_Deficit#0" mermaidBaseStyle="curved=1;startArrow=none;endArrow=block;endSize=7;strokeColor=light-dark(#333333,#cccccc);exitX=1;exitY=0.51;entryX=0;entryY=0.5;" mermaidBaseValue="" id="qpS-h8bxV_ccQJgN57QS-34">
-          <mxCell edge="1" parent="qpS-h8bxV_ccQJgN57QS-21" source="qpS-h8bxV_ccQJgN57QS-25" style="curved=1;startArrow=none;endArrow=block;endSize=7;strokeColor=light-dark(#333333,#cccccc);exitX=1;exitY=0.51;entryX=0;entryY=0.5;rounded=0;" target="qpS-h8bxV_ccQJgN57QS-26">
-            <mxGeometry relative="1" as="geometry">
-              <Array as="points" />
-            </mxGeometry>
-          </mxCell>
-        </UserObject>
-        <UserObject label="Так, баланс ≥ днів" mermaidId="e:Gateway_BalanceCheck-&gt;Task_NotifyManager#0" mermaidBaseStyle="curved=1;startArrow=none;endArrow=block;endSize=7;strokeColor=light-dark(#333333,#cccccc);html=1;fontSize=16;labelBackgroundColor=light-dark(#E8E8E88D,#2a2a2a8D);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);exitX=1;exitY=0.69;entryX=0;entryY=0.51;" mermaidBaseValue="Так, баланс ≥ днів" id="qpS-h8bxV_ccQJgN57QS-35">
-          <mxCell edge="1" parent="qpS-h8bxV_ccQJgN57QS-21" source="qpS-h8bxV_ccQJgN57QS-24" style="curved=1;startArrow=none;endArrow=block;endSize=7;strokeColor=light-dark(#333333,#cccccc);html=1;fontSize=16;labelBackgroundColor=light-dark(#E8E8E88D,#2a2a2a8D);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);exitX=1;exitY=0.69;entryX=0;entryY=0.51;rounded=0;" target="qpS-h8bxV_ccQJgN57QS-27">
-            <mxGeometry relative="1" as="geometry">
-              <Array as="points">
-                <mxPoint x="811" y="281" />
-              </Array>
-            </mxGeometry>
-          </mxCell>
-        </UserObject>
-        <UserObject label="" mermaidId="e:Task_DeductDays-&gt;Task_UpdateCalendar#0" mermaidBaseStyle="curved=1;startArrow=none;endArrow=block;endSize=7;strokeColor=light-dark(#333333,#cccccc);exitX=1;exitY=0.49;entryX=0;entryY=0.49;" mermaidBaseValue="" id="qpS-h8bxV_ccQJgN57QS-36">
-          <mxCell edge="1" parent="qpS-h8bxV_ccQJgN57QS-21" source="qpS-h8bxV_ccQJgN57QS-28" style="curved=1;startArrow=none;endArrow=block;endSize=7;strokeColor=light-dark(#333333,#cccccc);exitX=1;exitY=0.49;entryX=0;entryY=0.49;rounded=0;" target="qpS-h8bxV_ccQJgN57QS-29">
-            <mxGeometry relative="1" as="geometry">
-              <Array as="points" />
-            </mxGeometry>
-          </mxCell>
-        </UserObject>
-        <UserObject label="" mermaidId="e:Task_UpdateCalendar-&gt;Task_NotifyApproval#0" mermaidBaseStyle="curved=1;startArrow=none;endArrow=block;endSize=7;strokeColor=light-dark(#333333,#cccccc);exitX=1;exitY=0.49;entryX=0;entryY=0.49;" mermaidBaseValue="" id="qpS-h8bxV_ccQJgN57QS-37">
-          <mxCell edge="1" parent="qpS-h8bxV_ccQJgN57QS-21" source="qpS-h8bxV_ccQJgN57QS-29" style="curved=1;startArrow=none;endArrow=block;endSize=7;strokeColor=light-dark(#333333,#cccccc);exitX=1;exitY=0.49;entryX=0;entryY=0.49;rounded=0;" target="qpS-h8bxV_ccQJgN57QS-30">
-            <mxGeometry relative="1" as="geometry">
-              <Array as="points" />
-            </mxGeometry>
-          </mxCell>
-        </UserObject>
-        <UserObject label="" mermaidId="e:Task_SubmitRequest-&gt;SubProcess_CalcWorkDays#0" mermaidBaseStyle="curved=1;startArrow=none;endArrow=block;endSize=7;strokeColor=light-dark(#333333,#cccccc);exitX=1;exitY=0.51;entryX=0.48;entryY=1;" mermaidBaseValue="" id="qpS-h8bxV_ccQJgN57QS-38">
-          <mxCell edge="1" parent="qpS-h8bxV_ccQJgN57QS-1" source="qpS-h8bxV_ccQJgN57QS-5" style="curved=1;startArrow=none;endArrow=block;endSize=7;strokeColor=light-dark(#333333,#cccccc);exitX=1;exitY=0.51;entryX=0.48;entryY=1;rounded=0;" target="qpS-h8bxV_ccQJgN57QS-22">
-            <mxGeometry relative="1" as="geometry">
-              <Array as="points">
-                <mxPoint x="716" y="974" />
-                <mxPoint x="741" y="974" />
-              </Array>
-            </mxGeometry>
-          </mxCell>
-        </UserObject>
-        <UserObject label="" mermaidId="e:Task_NotifyManager-&gt;Task_ReviewRequest#0" mermaidBaseStyle="curved=1;startArrow=none;endArrow=block;endSize=7;strokeColor=light-dark(#333333,#cccccc);exitX=1;exitY=0.51;entryX=0.38;entryY=0;" mermaidBaseValue="" id="qpS-h8bxV_ccQJgN57QS-39">
-          <mxCell edge="1" parent="qpS-h8bxV_ccQJgN57QS-1" source="qpS-h8bxV_ccQJgN57QS-27" style="curved=1;startArrow=none;endArrow=block;endSize=7;strokeColor=light-dark(#333333,#cccccc);exitX=1;exitY=0.51;entryX=0.38;entryY=0;rounded=0;" target="qpS-h8bxV_ccQJgN57QS-10">
-            <mxGeometry relative="1" as="geometry">
-              <Array as="points">
-                <mxPoint x="1884" y="311" />
-                <mxPoint x="1909" y="311" />
-              </Array>
-            </mxGeometry>
-          </mxCell>
-        </UserObject>
-        <UserObject label="" mermaidId="e:Timer_Escalate-&gt;Task_HREscalation#0" mermaidBaseStyle="curved=1;startArrow=none;endArrow=block;endSize=7;strokeColor=light-dark(#333333,#cccccc);exitX=1;exitY=0.5;entryX=0.39;entryY=0;" mermaidBaseValue="" id="qpS-h8bxV_ccQJgN57QS-40">
-          <mxCell edge="1" parent="qpS-h8bxV_ccQJgN57QS-1" source="qpS-h8bxV_ccQJgN57QS-11" style="curved=1;startArrow=none;endArrow=block;endSize=7;strokeColor=light-dark(#333333,#cccccc);exitX=1;exitY=0.5;entryX=0.39;entryY=0;rounded=0;" target="qpS-h8bxV_ccQJgN57QS-20">
-            <mxGeometry relative="1" as="geometry">
-              <Array as="points">
-                <mxPoint x="2360" y="580" />
-                <mxPoint x="2385" y="580" />
-              </Array>
-            </mxGeometry>
-          </mxCell>
-        </UserObject>
-        <UserObject label="" mermaidId="e:Task_HREscalation-&gt;Gateway_ManagerDecision#0" mermaidBaseStyle="curved=1;startArrow=none;endArrow=block;endSize=7;strokeColor=light-dark(#333333,#cccccc);exitX=1;exitY=0.49;entryX=0;entryY=0.96;" mermaidBaseValue="" id="qpS-h8bxV_ccQJgN57QS-41">
-          <mxCell edge="1" parent="qpS-h8bxV_ccQJgN57QS-1" source="qpS-h8bxV_ccQJgN57QS-20" style="curved=1;startArrow=none;endArrow=block;endSize=7;strokeColor=light-dark(#333333,#cccccc);exitX=1;exitY=0.49;entryX=0;entryY=0.96;rounded=0;" target="qpS-h8bxV_ccQJgN57QS-12">
-            <mxGeometry relative="1" as="geometry">
-              <Array as="points">
-                <mxPoint x="2679" y="769" />
-                <mxPoint x="2704" y="613" />
-              </Array>
-            </mxGeometry>
-          </mxCell>
-        </UserObject>
-        <UserObject label="Погодити" mermaidId="e:Gateway_ManagerDecision-&gt;Task_DeductDays#0" mermaidBaseStyle="curved=1;startArrow=none;endArrow=block;endSize=7;strokeColor=light-dark(#333333,#cccccc);html=1;fontSize=16;labelBackgroundColor=light-dark(#E8E8E88D,#2a2a2a8D);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);exitX=1;exitY=0.35;entryX=0.39;entryY=1;" mermaidBaseValue="Погодити" id="qpS-h8bxV_ccQJgN57QS-42">
-          <mxCell edge="1" parent="qpS-h8bxV_ccQJgN57QS-1" source="qpS-h8bxV_ccQJgN57QS-12" style="curved=1;startArrow=none;endArrow=block;endSize=7;strokeColor=light-dark(#333333,#cccccc);html=1;fontSize=16;labelBackgroundColor=light-dark(#E8E8E88D,#2a2a2a8D);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);exitX=1;exitY=0.35;entryX=0.39;entryY=1;rounded=0;" target="qpS-h8bxV_ccQJgN57QS-28">
-            <mxGeometry relative="1" as="geometry">
-              <Array as="points">
-                <mxPoint x="2934" y="486" />
-              </Array>
-            </mxGeometry>
-          </mxCell>
-        </UserObject>
-        <UserObject label="" mermaidId="e:Task_NotifyApproval-&gt;End_Approved#0" mermaidBaseStyle="curved=1;startArrow=none;endArrow=block;endSize=7;strokeColor=light-dark(#333333,#cccccc);exitX=1;exitY=0.49;entryX=0;entryY=0.5;" mermaidBaseValue="" id="qpS-h8bxV_ccQJgN57QS-43">
-          <mxCell edge="1" parent="qpS-h8bxV_ccQJgN57QS-1" source="qpS-h8bxV_ccQJgN57QS-30" style="curved=1;startArrow=none;endArrow=block;endSize=7;strokeColor=light-dark(#333333,#cccccc);exitX=1;exitY=0.49;entryX=0;entryY=0.5;rounded=0;" target="qpS-h8bxV_ccQJgN57QS-6">
-            <mxGeometry relative="1" as="geometry">
-              <Array as="points">
-                <mxPoint x="3795" y="211" />
-                <mxPoint x="3820" y="974" />
-              </Array>
-            </mxGeometry>
-          </mxCell>
-        </UserObject>
-      </root>
-    </mxGraphModel>
-  </diagram>
-  <diagram id="VtkWxK0u5M182Qz8Cptg" name="Страница-2">
-    <mxGraphModel dx="2828" dy="1486" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
-      <root>
-        <mxCell id="0" />
-        <mxCell id="1" parent="0" />
-        <UserObject label="" mermaidData="{&#xa;  &quot;data&quot;: &quot;flowchart LR\n    subgraph Lane_T_Employee [\&quot;Працівник\&quot;]\n        Task_FillTimesheet[\&quot;Заповнити години&lt;br/&gt;в табелі\&quot;]\n        Task_SubmitTimesheet[\&quot;Надіслати табель&lt;br/&gt;на погодження\&quot;]\n    end\n\n    subgraph Lane_T_Lead [\&quot;Керівник підрозділу\&quot;]\n        Task_CheckTimesheet[\&quot;Перевірити табель&lt;br/&gt;підлеглого\&quot;]\n        Timer_DeadlineReminder((\&quot;Дедлайн подачі&lt;br/&gt;(2 дні)\&quot;))\n        Gateway_TimesheetDecision{\&quot;Табель&lt;br/&gt;погоджено?\&quot;}\n        Task_ReturnWithComments[\&quot;Повернути на доопрацювання&lt;br/&gt;з коментарем\&quot;]\n    end\n\n    subgraph Lane_T_Payroll [\&quot;HR / Бухгалтерія\&quot;]\n        Task_VerifyPayrollData[\&quot;Верифікувати дані&lt;br/&gt;для нарахувань\&quot;]\n        Task_SendToPayroll[\&quot;Передати дані у розрахунок&lt;br/&gt;заробітної плати\&quot;]\n    end\n\n    subgraph Lane_T_System [\&quot;Система\&quot;]\n        Start_PeriodEnd((\&quot;Настав кінець&lt;br/&gt;облікового періоду\&quot;))\n        Task_LockPeriod[\&quot;Заблокувати період&lt;br/&gt;для змін\&quot;]\n        End_PeriodClosed(((\&quot;Період обліку&lt;br/&gt;успішно закрито\&quot;)))\n    end\n\n    %% Потоки процесу\n    Start_PeriodEnd --&gt; Task_FillTimesheet\n    Task_FillTimesheet --&gt; Task_SubmitTimesheet\n    Task_SubmitTimesheet --&gt; Task_CheckTimesheet\n    Task_CheckTimesheet -.-&gt; Timer_DeadlineReminder\n    Task_CheckTimesheet --&gt; Gateway_TimesheetDecision\n    \n    Gateway_TimesheetDecision --&gt;|\&quot;Ні, розбіжності\&quot;| Task_ReturnWithComments\n    Task_ReturnWithComments --&gt; Task_FillTimesheet\n    \n    Gateway_TimesheetDecision --&gt;|\&quot;Так, погоджено\&quot;| Task_VerifyPayrollData\n    Task_VerifyPayrollData --&gt; Task_SendToPayroll\n    Task_SendToPayroll --&gt; Task_LockPeriod\n    Task_LockPeriod --&gt; End_PeriodClosed\n&quot;,&#xa;  &quot;config&quot;: null&#xa;}" id="9MHu-O08ZhEETY5GWbd5-1">
-          <mxCell connectable="0" parent="1" style="group;transparentBounds=1;editIcon=1;lockedGroup=0;groupPadding=10;" vertex="1">
-            <mxGeometry as="geometry" />
-          </mxCell>
-        </UserObject>
-        <UserObject label="Працівник" mermaidId="n:Lane_T_Employee" mermaidBaseStyle="html=1;whiteSpace=wrap;strokeWidth=1;verticalAlign=top;fillColor=light-dark(#ffffde,#1f2020);strokeColor=light-dark(#aaaa33,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" mermaidBaseValue="Працівник" id="9MHu-O08ZhEETY5GWbd5-2">
-          <mxCell parent="9MHu-O08ZhEETY5GWbd5-1" style="html=1;whiteSpace=wrap;strokeWidth=1;verticalAlign=top;fillColor=light-dark(#ffffde,#1f2020);strokeColor=light-dark(#aaaa33,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" vertex="1">
-            <mxGeometry height="199" width="503" x="277" y="592" as="geometry" />
-          </mxCell>
-        </UserObject>
-        <UserObject label="Заповнити години&#xa;в табелі" mermaidId="n:Task_FillTimesheet" mermaidBaseStyle="html=1;whiteSpace=wrap;strokeWidth=1;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" mermaidBaseValue="Заповнити години&#xa;в табелі" id="9MHu-O08ZhEETY5GWbd5-3">
-          <mxCell parent="9MHu-O08ZhEETY5GWbd5-2" style="html=1;whiteSpace=wrap;strokeWidth=1;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" vertex="1">
-            <mxGeometry height="73" width="194" x="35" y="101" as="geometry" />
-          </mxCell>
-        </UserObject>
-        <UserObject label="Надіслати табель&#xa;на погодження" mermaidId="n:Task_SubmitTimesheet" mermaidBaseStyle="html=1;whiteSpace=wrap;strokeWidth=1;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" mermaidBaseValue="Надіслати табель&#xa;на погодження" id="9MHu-O08ZhEETY5GWbd5-4">
-          <mxCell parent="9MHu-O08ZhEETY5GWbd5-2" style="html=1;whiteSpace=wrap;strokeWidth=1;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" vertex="1">
-            <mxGeometry height="73" width="189" x="279" y="45" as="geometry" />
-          </mxCell>
-        </UserObject>
-        <UserObject label="" mermaidId="e:Task_FillTimesheet-&gt;Task_SubmitTimesheet#0" mermaidBaseStyle="curved=1;startArrow=none;endArrow=block;endSize=7;strokeColor=light-dark(#333333,#cccccc);exitX=0.91;exitY=0;entryX=0;entryY=0.51;" mermaidBaseValue="" id="9MHu-O08ZhEETY5GWbd5-5">
-          <mxCell edge="1" parent="9MHu-O08ZhEETY5GWbd5-2" source="9MHu-O08ZhEETY5GWbd5-3" style="curved=1;startArrow=none;endArrow=block;endSize=7;strokeColor=light-dark(#333333,#cccccc);exitX=0.91;exitY=0;entryX=0;entryY=0.51;rounded=0;" target="9MHu-O08ZhEETY5GWbd5-4">
-            <mxGeometry relative="1" as="geometry">
-              <Array as="points">
-                <mxPoint x="254" y="82" />
-              </Array>
-            </mxGeometry>
-          </mxCell>
-        </UserObject>
-        <UserObject label="Керівник підрозділу" mermaidId="n:Lane_T_Lead" mermaidBaseStyle="html=1;whiteSpace=wrap;strokeWidth=1;verticalAlign=top;fillColor=light-dark(#ffffde,#1f2020);strokeColor=light-dark(#aaaa33,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" mermaidBaseValue="Керівник підрозділу" id="9MHu-O08ZhEETY5GWbd5-6">
-          <mxCell parent="9MHu-O08ZhEETY5GWbd5-1" style="html=1;whiteSpace=wrap;strokeWidth=1;verticalAlign=top;fillColor=light-dark(#ffffde,#1f2020);strokeColor=light-dark(#aaaa33,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" vertex="1">
-            <mxGeometry height="476" width="945" x="810" y="455" as="geometry" />
-          </mxCell>
-        </UserObject>
-        <UserObject label="Перевірити табель&#xa;підлеглого" mermaidId="n:Task_CheckTimesheet" mermaidBaseStyle="html=1;whiteSpace=wrap;strokeWidth=1;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" mermaidBaseValue="Перевірити табель&#xa;підлеглого" id="9MHu-O08ZhEETY5GWbd5-7">
-          <mxCell parent="9MHu-O08ZhEETY5GWbd5-6" style="html=1;whiteSpace=wrap;strokeWidth=1;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" vertex="1">
-            <mxGeometry height="73" width="199" x="35" y="182" as="geometry" />
-          </mxCell>
-        </UserObject>
-        <UserObject label="Дедлайн подачі&#xa;(2 дні)" mermaidId="n:Timer_DeadlineReminder" mermaidBaseStyle="ellipse;html=1;aspect=fixed;strokeWidth=1;whiteSpace=wrap;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" mermaidBaseValue="Дедлайн подачі&#xa;(2 дні)" id="9MHu-O08ZhEETY5GWbd5-8">
-          <mxCell parent="9MHu-O08ZhEETY5GWbd5-6" style="ellipse;html=1;aspect=fixed;strokeWidth=1;whiteSpace=wrap;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" vertex="1">
-            <mxGeometry height="147" width="147" x="287" y="45" as="geometry" />
-          </mxCell>
-        </UserObject>
-        <UserObject label="Табель&#xa;погоджено?" mermaidId="n:Gateway_TimesheetDecision" mermaidBaseStyle="rhombus;html=1;strokeWidth=1;whiteSpace=wrap;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" mermaidBaseValue="Табель&#xa;погоджено?" id="9MHu-O08ZhEETY5GWbd5-9">
-          <mxCell parent="9MHu-O08ZhEETY5GWbd5-6" style="rhombus;html=1;strokeWidth=1;whiteSpace=wrap;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" vertex="1">
-            <mxGeometry height="154" width="154" x="284" y="242" as="geometry" />
-          </mxCell>
-        </UserObject>
-        <UserObject label="Повернути на доопрацювання&#xa;з коментарем" mermaidId="n:Task_ReturnWithComments" mermaidBaseStyle="html=1;whiteSpace=wrap;strokeWidth=1;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" mermaidBaseValue="Повернути на доопрацювання&#xa;з коментарем" id="9MHu-O08ZhEETY5GWbd5-10">
-          <mxCell parent="9MHu-O08ZhEETY5GWbd5-6" style="html=1;whiteSpace=wrap;strokeWidth=1;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" vertex="1">
-            <mxGeometry height="73" width="280" x="630" y="378" as="geometry" />
-          </mxCell>
-        </UserObject>
-        <UserObject label="" mermaidId="e:Task_CheckTimesheet-&gt;Timer_DeadlineReminder#0" mermaidBaseStyle="curved=1;dashed=1;dashPattern=2 3;fixDash=1;startArrow=none;endArrow=block;endSize=7;strokeColor=light-dark(#333333,#cccccc);exitX=0.73;exitY=0;entryX=0;entryY=0.5;" mermaidBaseValue="" id="9MHu-O08ZhEETY5GWbd5-11">
-          <mxCell edge="1" parent="9MHu-O08ZhEETY5GWbd5-6" source="9MHu-O08ZhEETY5GWbd5-7" style="curved=1;dashed=1;dashPattern=2 3;fixDash=1;startArrow=none;endArrow=block;endSize=7;strokeColor=light-dark(#333333,#cccccc);exitX=0.73;exitY=0;entryX=0;entryY=0.5;rounded=0;" target="9MHu-O08ZhEETY5GWbd5-8">
-            <mxGeometry relative="1" as="geometry">
-              <Array as="points">
-                <mxPoint x="259" y="119" />
-              </Array>
-            </mxGeometry>
-          </mxCell>
-        </UserObject>
-        <UserObject label="" mermaidId="e:Task_CheckTimesheet-&gt;Gateway_TimesheetDecision#0" mermaidBaseStyle="curved=1;startArrow=none;endArrow=block;endSize=7;strokeColor=light-dark(#333333,#cccccc);exitX=0.73;exitY=1;entryX=0;entryY=0.5;" mermaidBaseValue="" id="9MHu-O08ZhEETY5GWbd5-12">
-          <mxCell edge="1" parent="9MHu-O08ZhEETY5GWbd5-6" source="9MHu-O08ZhEETY5GWbd5-7" style="curved=1;startArrow=none;endArrow=block;endSize=7;strokeColor=light-dark(#333333,#cccccc);exitX=0.73;exitY=1;entryX=0;entryY=0.5;rounded=0;" target="9MHu-O08ZhEETY5GWbd5-9">
-            <mxGeometry relative="1" as="geometry">
-              <Array as="points">
-                <mxPoint x="259" y="319" />
-              </Array>
-            </mxGeometry>
-          </mxCell>
-        </UserObject>
-        <UserObject label="Ні, розбіжності" mermaidId="e:Gateway_TimesheetDecision-&gt;Task_ReturnWithComments#0" mermaidBaseStyle="curved=1;startArrow=none;endArrow=block;endSize=7;strokeColor=light-dark(#333333,#cccccc);html=1;fontSize=16;labelBackgroundColor=light-dark(#E8E8E88D,#2a2a2a8D);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);exitX=1;exitY=0.62;entryX=0.11;entryY=0;" mermaidBaseValue="Ні, розбіжності" id="9MHu-O08ZhEETY5GWbd5-13">
-          <mxCell edge="1" parent="9MHu-O08ZhEETY5GWbd5-6" source="9MHu-O08ZhEETY5GWbd5-9" style="curved=1;startArrow=none;endArrow=block;endSize=7;strokeColor=light-dark(#333333,#cccccc);html=1;fontSize=16;labelBackgroundColor=light-dark(#E8E8E88D,#2a2a2a8D);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);exitX=1;exitY=0.62;entryX=0.11;entryY=0;rounded=0;" target="9MHu-O08ZhEETY5GWbd5-10">
-            <mxGeometry relative="1" as="geometry">
-              <Array as="points">
-                <mxPoint x="521" y="359" />
-                <mxPoint x="605" y="359" />
-              </Array>
-            </mxGeometry>
-          </mxCell>
-        </UserObject>
-        <UserObject label="HR / Бухгалтерія" mermaidId="n:Lane_T_Payroll" mermaidBaseStyle="html=1;whiteSpace=wrap;strokeWidth=1;verticalAlign=top;fillColor=light-dark(#ffffde,#1f2020);strokeColor=light-dark(#aaaa33,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" mermaidBaseValue="HR / Бухгалтерія" id="9MHu-O08ZhEETY5GWbd5-14">
-          <mxCell parent="9MHu-O08ZhEETY5GWbd5-1" style="html=1;whiteSpace=wrap;strokeWidth=1;verticalAlign=top;fillColor=light-dark(#ffffde,#1f2020);strokeColor=light-dark(#aaaa33,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" vertex="1">
-            <mxGeometry height="143" width="652" x="1446" y="292" as="geometry" />
-          </mxCell>
-        </UserObject>
-        <UserObject label="Верифікувати дані&#xa;для нарахувань" mermaidId="n:Task_VerifyPayrollData" mermaidBaseStyle="html=1;whiteSpace=wrap;strokeWidth=1;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" mermaidBaseValue="Верифікувати дані&#xa;для нарахувань" id="9MHu-O08ZhEETY5GWbd5-15">
-          <mxCell parent="9MHu-O08ZhEETY5GWbd5-14" style="html=1;whiteSpace=wrap;strokeWidth=1;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" vertex="1">
-            <mxGeometry height="73" width="198" x="35" y="45" as="geometry" />
-          </mxCell>
-        </UserObject>
-        <UserObject label="Передати дані у розрахунок&#xa;заробітної плати" mermaidId="n:Task_SendToPayroll" mermaidBaseStyle="html=1;whiteSpace=wrap;strokeWidth=1;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" mermaidBaseValue="Передати дані у розрахунок&#xa;заробітної плати" id="9MHu-O08ZhEETY5GWbd5-16">
-          <mxCell parent="9MHu-O08ZhEETY5GWbd5-14" style="html=1;whiteSpace=wrap;strokeWidth=1;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" vertex="1">
-            <mxGeometry height="73" width="268" x="349" y="45" as="geometry" />
-          </mxCell>
-        </UserObject>
-        <UserObject label="" mermaidId="e:Task_VerifyPayrollData-&gt;Task_SendToPayroll#0" mermaidBaseStyle="curved=1;startArrow=none;endArrow=block;endSize=7;strokeColor=light-dark(#333333,#cccccc);exitX=1;exitY=0.51;entryX=0;entryY=0.51;" mermaidBaseValue="" id="9MHu-O08ZhEETY5GWbd5-17">
-          <mxCell edge="1" parent="9MHu-O08ZhEETY5GWbd5-14" source="9MHu-O08ZhEETY5GWbd5-15" style="curved=1;startArrow=none;endArrow=block;endSize=7;strokeColor=light-dark(#333333,#cccccc);exitX=1;exitY=0.51;entryX=0;entryY=0.51;rounded=0;" target="9MHu-O08ZhEETY5GWbd5-16">
-            <mxGeometry relative="1" as="geometry">
-              <Array as="points" />
-            </mxGeometry>
-          </mxCell>
-        </UserObject>
-        <UserObject label="Система" mermaidId="n:Lane_T_System" mermaidBaseStyle="html=1;whiteSpace=wrap;strokeWidth=1;verticalAlign=top;fillColor=light-dark(#ffffde,#1f2020);strokeColor=light-dark(#aaaa33,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" mermaidBaseValue="Система" id="9MHu-O08ZhEETY5GWbd5-18">
-          <mxCell parent="9MHu-O08ZhEETY5GWbd5-1" style="html=1;whiteSpace=wrap;strokeWidth=1;verticalAlign=top;fillColor=light-dark(#ffffde,#1f2020);strokeColor=light-dark(#aaaa33,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" vertex="1">
-            <mxGeometry height="242" width="2560" x="30" y="30" as="geometry" />
-          </mxCell>
-        </UserObject>
-        <UserObject label="Настав кінець&#xa;облікового періоду" mermaidId="n:Start_PeriodEnd" mermaidBaseStyle="ellipse;html=1;aspect=fixed;strokeWidth=1;whiteSpace=wrap;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" mermaidBaseValue="Настав кінець&#xa;облікового періоду" id="9MHu-O08ZhEETY5GWbd5-19">
-          <mxCell parent="9MHu-O08ZhEETY5GWbd5-18" style="ellipse;html=1;aspect=fixed;strokeWidth=1;whiteSpace=wrap;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" vertex="1">
-            <mxGeometry height="172" width="172" x="35" y="45" as="geometry" />
-          </mxCell>
-        </UserObject>
-        <UserObject label="Заблокувати період&#xa;для змін" mermaidId="n:Task_LockPeriod" mermaidBaseStyle="html=1;whiteSpace=wrap;strokeWidth=1;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" mermaidBaseValue="Заблокувати період&#xa;для змін" id="9MHu-O08ZhEETY5GWbd5-20">
-          <mxCell parent="9MHu-O08ZhEETY5GWbd5-18" style="html=1;whiteSpace=wrap;strokeWidth=1;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" vertex="1">
-            <mxGeometry height="73" width="206" x="2108" y="95" as="geometry" />
-          </mxCell>
-        </UserObject>
-        <UserObject label="Період обліку&#xa;успішно закрито" mermaidId="n:End_PeriodClosed" mermaidBaseStyle="ellipse;html=1;shape=doubleEllipse;aspect=fixed;strokeWidth=1;whiteSpace=wrap;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" mermaidBaseValue="Період обліку&#xa;успішно закрито" id="9MHu-O08ZhEETY5GWbd5-21">
-          <mxCell parent="9MHu-O08ZhEETY5GWbd5-18" style="ellipse;html=1;shape=doubleEllipse;aspect=fixed;strokeWidth=1;whiteSpace=wrap;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" vertex="1">
-            <mxGeometry height="161" width="161" x="2364" y="51" as="geometry" />
-          </mxCell>
-        </UserObject>
-        <UserObject label="" mermaidId="e:Task_LockPeriod-&gt;End_PeriodClosed#0" mermaidBaseStyle="curved=1;startArrow=none;endArrow=block;endSize=7;strokeColor=light-dark(#333333,#cccccc);exitX=1;exitY=0.49;entryX=0;entryY=0.5;" mermaidBaseValue="" id="9MHu-O08ZhEETY5GWbd5-22">
-          <mxCell edge="1" parent="9MHu-O08ZhEETY5GWbd5-18" source="9MHu-O08ZhEETY5GWbd5-20" style="curved=1;startArrow=none;endArrow=block;endSize=7;strokeColor=light-dark(#333333,#cccccc);exitX=1;exitY=0.49;entryX=0;entryY=0.5;rounded=0;" target="9MHu-O08ZhEETY5GWbd5-21">
-            <mxGeometry relative="1" as="geometry">
-              <Array as="points" />
-            </mxGeometry>
-          </mxCell>
-        </UserObject>
-        <UserObject label="" mermaidId="e:Start_PeriodEnd-&gt;Task_FillTimesheet#0" mermaidBaseStyle="curved=1;startArrow=none;endArrow=block;endSize=7;strokeColor=light-dark(#333333,#cccccc);exitX=1;exitY=0.5;entryX=0.46;entryY=0;" mermaidBaseValue="" id="9MHu-O08ZhEETY5GWbd5-23">
-          <mxCell edge="1" parent="9MHu-O08ZhEETY5GWbd5-1" source="9MHu-O08ZhEETY5GWbd5-19" style="curved=1;startArrow=none;endArrow=block;endSize=7;strokeColor=light-dark(#333333,#cccccc);exitX=1;exitY=0.5;entryX=0.46;entryY=0;rounded=0;" target="9MHu-O08ZhEETY5GWbd5-3">
-            <mxGeometry relative="1" as="geometry">
-              <Array as="points">
-                <mxPoint x="262" y="161" />
-                <mxPoint x="287" y="161" />
-              </Array>
-            </mxGeometry>
-          </mxCell>
-        </UserObject>
-        <UserObject label="" mermaidId="e:Task_SubmitTimesheet-&gt;Task_CheckTimesheet#0" mermaidBaseStyle="curved=1;startArrow=none;endArrow=block;endSize=7;strokeColor=light-dark(#333333,#cccccc);exitX=1;exitY=0.51;entryX=0;entryY=0.51;" mermaidBaseValue="" id="9MHu-O08ZhEETY5GWbd5-24">
-          <mxCell edge="1" parent="9MHu-O08ZhEETY5GWbd5-1" source="9MHu-O08ZhEETY5GWbd5-4" style="curved=1;startArrow=none;endArrow=block;endSize=7;strokeColor=light-dark(#333333,#cccccc);exitX=1;exitY=0.51;entryX=0;entryY=0.51;rounded=0;" target="9MHu-O08ZhEETY5GWbd5-7">
-            <mxGeometry relative="1" as="geometry">
-              <Array as="points" />
-            </mxGeometry>
-          </mxCell>
-        </UserObject>
-        <UserObject label="" mermaidId="e:Task_ReturnWithComments-&gt;Task_FillTimesheet#0" mermaidBaseStyle="curved=1;startArrow=none;endArrow=block;endSize=7;strokeColor=light-dark(#333333,#cccccc);exitX=0;exitY=0.68;entryX=0.65;entryY=1;" mermaidBaseValue="" id="9MHu-O08ZhEETY5GWbd5-25">
-          <mxCell edge="1" parent="9MHu-O08ZhEETY5GWbd5-1" source="9MHu-O08ZhEETY5GWbd5-10" style="curved=1;startArrow=none;endArrow=block;endSize=7;strokeColor=light-dark(#333333,#cccccc);exitX=0;exitY=0.68;entryX=0.65;entryY=1;rounded=0;" target="9MHu-O08ZhEETY5GWbd5-3">
-            <mxGeometry relative="1" as="geometry">
-              <Array as="points">
-                <mxPoint x="1415" y="886" />
-                <mxPoint x="1331" y="886" />
-                <mxPoint x="1171" y="886" />
-                <mxPoint x="1069" y="886" />
-                <mxPoint x="945" y="886" />
-                <mxPoint x="820" y="886" />
-                <mxPoint x="795" y="886" />
-                <mxPoint x="770" y="886" />
-                <mxPoint x="651" y="886" />
-                <mxPoint x="531" y="886" />
-              </Array>
-            </mxGeometry>
-          </mxCell>
-        </UserObject>
-        <UserObject label="Так, погоджено" mermaidId="e:Gateway_TimesheetDecision-&gt;Task_VerifyPayrollData#0" mermaidBaseStyle="curved=1;startArrow=none;endArrow=block;endSize=7;strokeColor=light-dark(#333333,#cccccc);html=1;fontSize=16;labelBackgroundColor=light-dark(#E8E8E88D,#2a2a2a8D);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);exitX=1;exitY=0.06;entryX=0.38;entryY=1;" mermaidBaseValue="Так, погоджено" id="9MHu-O08ZhEETY5GWbd5-26">
-          <mxCell edge="1" parent="9MHu-O08ZhEETY5GWbd5-1" source="9MHu-O08ZhEETY5GWbd5-9" style="curved=1;startArrow=none;endArrow=block;endSize=7;strokeColor=light-dark(#333333,#cccccc);html=1;fontSize=16;labelBackgroundColor=light-dark(#E8E8E88D,#2a2a2a8D);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);exitX=1;exitY=0.06;entryX=0.38;entryY=1;rounded=0;" target="9MHu-O08ZhEETY5GWbd5-15">
-            <mxGeometry relative="1" as="geometry">
-              <Array as="points">
-                <mxPoint x="1331" y="634" />
-                <mxPoint x="1415" y="634" />
-              </Array>
-            </mxGeometry>
-          </mxCell>
-        </UserObject>
-        <UserObject label="" mermaidId="e:Task_SendToPayroll-&gt;Task_LockPeriod#0" mermaidBaseStyle="curved=1;startArrow=none;endArrow=block;endSize=7;strokeColor=light-dark(#333333,#cccccc);exitX=1;exitY=0.51;entryX=0;entryY=0.49;" mermaidBaseValue="" id="9MHu-O08ZhEETY5GWbd5-27">
-          <mxCell edge="1" parent="9MHu-O08ZhEETY5GWbd5-1" source="9MHu-O08ZhEETY5GWbd5-16" style="curved=1;startArrow=none;endArrow=block;endSize=7;strokeColor=light-dark(#333333,#cccccc);exitX=1;exitY=0.51;entryX=0;entryY=0.49;rounded=0;" target="9MHu-O08ZhEETY5GWbd5-20">
-            <mxGeometry relative="1" as="geometry">
-              <Array as="points">
-                <mxPoint x="2088" y="374" />
-                <mxPoint x="2113" y="161" />
-              </Array>
-            </mxGeometry>
-          </mxCell>
-        </UserObject>
+        <mxCell id="pool2" parent="1" style="swimlane;html=1;childLayout=stackLayout;resizeParent=1;resizeParentMax=0;startSize=30;horizontal=0;horizontalFlip=0;fillColor=#E8EEF5;strokeColor=#1B365D;fontStyle=1;fontSize=13;swimlaneFillColor=#FFFFFF;" value="Компанія «Персонал+»" vertex="1">
+          <mxGeometry height="700" width="1560" x="40" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="lane2_emp" parent="pool2" style="swimlane;html=1;startSize=26;horizontal=0;fillColor=#FFFFFF;strokeColor=#B0C4DE;fontStyle=1;fontSize=11;" value="Працівник" vertex="1">
+          <mxGeometry height="170" width="1530" x="30" as="geometry" />
+        </mxCell>
+        <mxCell id="task2_fill" parent="lane2_emp" style="rounded=1;whiteSpace=wrap;html=1;arcSize=14;fillColor=#EBF3FB;strokeColor=#2B5B84;fontSize=11;" value="Заповнити години&#xa;в табелі" vertex="1">
+          <mxGeometry height="65" width="130" x="270" y="50" as="geometry" />
+        </mxCell>
+        <mxCell id="data_timesheet" parent="lane2_emp" style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;darkOpacity=0.05;size=14;fillColor=#FFFFFF;strokeColor=#607D8B;fontSize=10;" value="Звіт&#xa;годин" vertex="1">
+          <mxGeometry height="42" width="40" x="315" y="120" as="geometry" />
+        </mxCell>
+        <mxCell id="annot_timesheet_reg" parent="lane2_emp" style="shape=partialRectangle;top=0;bottom=0;right=0;html=1;whiteSpace=wrap;fillColor=none;strokeColor=#78909C;strokeWidth=2;fontSize=9;align=left;spacingLeft=4;" value="[Регламент: до 1-го числа&#xa;наступного місяця]" vertex="1">
+          <mxGeometry height="35" width="140" x="110" y="50" as="geometry" />
+        </mxCell>
+        <mxCell id="timer2_bound_deadline" parent="lane2_emp" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#FFF8E1;strokeColor=#F57F17;strokeWidth=2;shape=doubleEllipse;fontSize=9;" value="3 дні" vertex="1">
+          <mxGeometry height="30" width="30" x="320" y="100" as="geometry" />
+        </mxCell>
+        <mxCell id="task2_submit" parent="lane2_emp" style="rounded=1;whiteSpace=wrap;html=1;arcSize=14;fillColor=#EBF3FB;strokeColor=#2B5B84;fontSize=11;" value="Надіслати табель&#xa;на погодження" vertex="1">
+          <mxGeometry height="60" width="130" x="460" y="50" as="geometry" />
+        </mxCell>
+        <mxCell id="lane2_lead" parent="pool2" style="swimlane;html=1;startSize=26;horizontal=0;fillColor=#F8FAFC;strokeColor=#B0C4DE;fontStyle=1;fontSize=11;" value="Керівник підрозділу" vertex="1">
+          <mxGeometry height="170" width="1530" x="30" y="170" as="geometry" />
+        </mxCell>
+        <mxCell id="task2_lead_check" parent="lane2_lead" style="rounded=1;whiteSpace=wrap;html=1;arcSize=14;fillColor=#EBF3FB;strokeColor=#2B5B84;fontSize=11;" value="Перевірити табель&#xa;підлеглого" vertex="1">
+          <mxGeometry height="65" width="140" x="640" y="50" as="geometry" />
+        </mxCell>
+        <mxCell id="timer2_bound_lead_48h" parent="lane2_lead" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#FFF8E1;strokeColor=#F57F17;strokeWidth=1.5;shape=doubleEllipse;dashed=1;fontSize=9;" value="48 год" vertex="1">
+          <mxGeometry height="30" width="30" x="695" y="100" as="geometry" />
+        </mxCell>
+        <mxCell id="event_gw_lead" parent="lane2_lead" style="rhombus;whiteSpace=wrap;html=1;fillColor=#FFF9C4;strokeColor=#FBC02D;strokeWidth=1.5;fontSize=10;" value="Шлюз&#xa;подій" vertex="1">
+          <mxGeometry height="55" width="55" x="830" y="55" as="geometry" />
+        </mxCell>
+        <mxCell id="annot_event_gw" parent="lane2_lead" style="shape=partialRectangle;top=0;bottom=0;right=0;html=1;whiteSpace=wrap;fillColor=none;strokeColor=#78909C;strokeWidth=2;fontSize=9;align=left;spacingLeft=4;" value="[Event-Based Gateway:&#xa;очікування рішення або спливу строку]" vertex="1">
+          <mxGeometry height="35" width="170" x="790" y="125" as="geometry" />
+        </mxCell>
+        <mxCell id="evt_msg_approve" parent="lane2_lead" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#E8F5E9;strokeColor=#2E7D32;strokeWidth=1.5;shape=doubleEllipse;fontSize=9;" value="Табель&#xa;погоджено" vertex="1">
+          <mxGeometry height="35" width="35" x="960" y="65" as="geometry" />
+        </mxCell>
+        <mxCell id="evt_msg_return" parent="lane2_lead" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#FFF8E1;strokeColor=#F57F17;strokeWidth=1.5;shape=doubleEllipse;fontSize=9;" value="Повернено на&#xa;доопрацювання" vertex="1">
+          <mxGeometry height="35" width="35" x="960" y="15" as="geometry" />
+        </mxCell>
+        <mxCell id="evt_timer_max" parent="lane2_lead" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#FFEBEE;strokeColor=#C62828;strokeWidth=1.5;shape=doubleEllipse;fontSize=9;" value="5 днів&#xa;минуло" vertex="1">
+          <mxGeometry height="35" width="35" x="960" y="115" as="geometry" />
+        </mxCell>
+        <mxCell id="lane2_hr" parent="pool2" style="swimlane;html=1;startSize=26;horizontal=0;fillColor=#FFFFFF;strokeColor=#B0C4DE;fontStyle=1;fontSize=11;" value="HR / Бухгалтерія" vertex="1">
+          <mxGeometry height="160" width="1530" x="30" y="340" as="geometry" />
+        </mxCell>
+        <mxCell id="task2_hr_verify" parent="lane2_hr" style="rounded=1;whiteSpace=wrap;html=1;arcSize=14;fillColor=#EBF3FB;strokeColor=#2B5B84;fontSize=11;" value="Верифікувати дані&#xa;для нарахувань" vertex="1">
+          <mxGeometry height="60" width="140" x="1080" y="50" as="geometry" />
+        </mxCell>
+        <mxCell id="lane2_sys" parent="pool2" style="swimlane;html=1;startSize=26;horizontal=0;fillColor=#F8FAFC;strokeColor=#B0C4DE;fontStyle=1;fontSize=11;" value="Система" vertex="1">
+          <mxGeometry height="200" width="1530" x="30" y="500" as="geometry" />
+        </mxCell>
+        <mxCell id="start2_timer" parent="lane2_sys" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#E8F5E9;strokeColor=#2E7D32;strokeWidth=1.5;fontSize=10;" value="Настав кінець&#xa;облікового періоду" vertex="1">
+          <mxGeometry height="40" width="40" x="40" y="45" as="geometry" />
+        </mxCell>
+        <mxCell id="task2_gen_draft" parent="lane2_sys" style="rounded=1;whiteSpace=wrap;html=1;arcSize=14;fillColor=#F3F4F6;strokeColor=#4B5563;fontSize=11;" value="Сформувати чернетку&#xa;табеля у кабінеті" vertex="1">
+          <mxGeometry height="55" width="135" x="120" y="38" as="geometry" />
+        </mxCell>
+        <mxCell id="task2_default_calc" parent="lane2_sys" style="rounded=1;whiteSpace=wrap;html=1;arcSize=14;fillColor=#F3F4F6;strokeColor=#4B5563;fontSize=11;" value="Застосувати нарахування&#xa;за замовчуванням" vertex="1">
+          <mxGeometry height="55" width="145" x="345" y="38" as="geometry" />
+        </mxCell>
+        <mxCell id="end2_default" parent="lane2_sys" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#FFEBEE;strokeColor=#C62828;strokeWidth=3;fontSize=10;" value="Табель не подано —&#xa;розрахунок за нормою" vertex="1">
+          <mxGeometry height="40" width="40" x="525" y="45" as="geometry" />
+        </mxCell>
+        <mxCell id="task2_reminder_lead" parent="lane2_sys" style="rounded=1;whiteSpace=wrap;html=1;arcSize=14;fillColor=#F3F4F6;strokeColor=#4B5563;fontSize=11;" value="Надіслати нагадування&#xa;керівнику (email/дзвінок)" vertex="1">
+          <mxGeometry height="55" width="145" x="645" y="125" as="geometry" />
+        </mxCell>
+        <mxCell id="end2_reminder" parent="lane2_sys" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#E8F5E9;strokeColor=#2E7D32;strokeWidth=3;fontSize=10;" value="Нагадування&#xa;надіслано" vertex="1">
+          <mxGeometry height="40" width="40" x="830" y="132" as="geometry" />
+        </mxCell>
+        <mxCell id="task2_lock" parent="lane2_sys" style="rounded=1;whiteSpace=wrap;html=1;arcSize=14;fillColor=#F3F4F6;strokeColor=#4B5563;fontSize=11;" value="Заблокувати період та&#xa;передати на виплату" vertex="1">
+          <mxGeometry height="55" width="140" x="1270" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="end2_success" parent="lane2_sys" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#E8F5E9;strokeColor=#2E7D32;strokeWidth=3;fontSize=10;" value="Табель успішно&#xa;проведено" vertex="1">
+          <mxGeometry height="40" width="40" x="1450" y="48" as="geometry" />
+        </mxCell>
+        <mxCell id="e2_1" edge="1" parent="1" source="start2_timer" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#263238;strokeWidth=1.2;" target="task2_gen_draft">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e2_2" edge="1" parent="1" source="task2_gen_draft" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#263238;strokeWidth=1.2;" target="task2_fill">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e2_assoc_data" edge="1" parent="1" source="task2_fill" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;dashed=1;dashPattern=2 3;endArrow=none;strokeColor=#78909C;strokeWidth=1.2;" target="data_timesheet">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e2_assoc_reg" edge="1" parent="1" source="annot_timesheet_reg" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;dashed=1;dashPattern=2 3;endArrow=none;strokeColor=#78909C;strokeWidth=1.2;" target="task2_fill">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e2_3" edge="1" parent="1" source="task2_fill" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#263238;strokeWidth=1.2;" target="task2_submit">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e2_timeout_emp" edge="1" parent="1" source="timer2_bound_deadline" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#C62828;strokeWidth=1.2;fontSize=9;fontColor=#C62828;" target="task2_default_calc" value="[дедлайн минув]">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e2_4" edge="1" parent="1" source="task2_default_calc" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#263238;strokeWidth=1.2;" target="end2_default">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e2_5" edge="1" parent="1" source="task2_submit" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#263238;strokeWidth=1.2;" target="task2_lead_check">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e2_lead_reminder" edge="1" parent="1" source="timer2_bound_lead_48h" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#F57F17;strokeWidth=1.2;fontSize=9;fontColor=#F57F17;" target="task2_reminder_lead" value="[48 год]">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e2_rem_end" edge="1" parent="1" source="task2_reminder_lead" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#263238;strokeWidth=1.2;" target="end2_reminder">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e2_6" edge="1" parent="1" source="task2_lead_check" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#263238;strokeWidth=1.2;" target="event_gw_lead">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e2_assoc_gw" edge="1" parent="1" source="annot_event_gw" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;dashed=1;dashPattern=2 3;endArrow=none;strokeColor=#78909C;strokeWidth=1.2;" target="event_gw_lead">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e2_gw_1" edge="1" parent="1" source="event_gw_lead" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#2E7D32;strokeWidth=1.2;" target="evt_msg_approve">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e2_gw_2" edge="1" parent="1" source="event_gw_lead" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#F57F17;strokeWidth=1.2;" target="evt_msg_return">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e2_gw_3" edge="1" parent="1" source="event_gw_lead" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#C62828;strokeWidth=1.2;" target="evt_timer_max">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e2_loop" edge="1" parent="1" source="evt_msg_return" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#F57F17;strokeWidth=1.2;fontSize=9;fontColor=#F57F17;" target="task2_fill" value="[повернути на виправлення]">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1010" y="30" />
+              <mxPoint x="380" y="30" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e2_to_hr" edge="1" parent="1" source="evt_msg_approve" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#263238;strokeWidth=1.2;" target="task2_hr_verify">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e2_to_autoclose" edge="1" parent="1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#C62828;strokeWidth=1.2;" target="task2_default_calc">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1050" y="420" />
+              <mxPoint x="1030" y="420" />
+              <mxPoint x="1030" y="660" />
+              <mxPoint x="487.52" y="660" />
+            </Array>
+            <mxPoint x="1050" y="370" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e2_7" edge="1" parent="1" source="task2_hr_verify" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#263238;strokeWidth=1.2;" target="task2_lock">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e2_8" edge="1" parent="1" source="task2_lock" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#263238;strokeWidth=1.2;" target="end2_success">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
       </root>
     </mxGraphModel>
   </diagram>
