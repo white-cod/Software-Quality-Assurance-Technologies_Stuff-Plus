@@ -31,7 +31,7 @@ sprint3/
 ├── README.md            # Паспорт: трекер, статистика, покриття «вимога → TC», DoD, сценарій Demo
 ├── test-cases.xlsx      # «Test cases» (50 кейсів + Bug ID / issue), «Coverage», «Review»
 ├── test-cases.md        # Той самий набір для читання на GitHub: SETUP-1, кейси з кроками, покриття, рецензування
-├── execution-log.xlsx   # «Run 1»: Run, TC-ID, Дата, Виконавець, Середовище, Статус, Bug ID, Коментар; «Environment»
+├── execution-log.xlsx   # «Run 1»: рядок = одне виконання (74, зараховано 50): Run, Прохід, TC-ID, Дата, Час, Виконавець, Середовище, Статус, Bug ID, Зараховано, Коментар; «Environment»
 ├── bug-reports.md       # Дзеркало issues: 12 звітів за шаблоном 4.11 з позначкою Reviewer
 ├── attachments/         # BUG-001-1.png … — знімки екрана, іменовані за Bug ID
 ├── task-board.md        # Таблиця розподілу задач
