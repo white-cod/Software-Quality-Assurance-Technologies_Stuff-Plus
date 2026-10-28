@@ -13,7 +13,7 @@
 
 ## 2. Склад команди та ротація ролей
 
-Відповідно до Статуту команди ([`docs/team/charter.md`](docs/team/charter.md)), кожен учасник проходить повний цикл базових ролей за Спринти 1–4:
+Відповідно до Статуту команди ([`team/charter.md`](team/charter.md)), кожен учасник проходить повний цикл базових ролей за Спринти 1–4:
 * **КТ** — Керівник тестування (Test Lead)
 * **ТА** — Тест-аналітик (Test Analyst)
 * **ІТ** — Інженер з тестування (Test Engineer / SDET)
@@ -21,10 +21,10 @@
 
 | Член команди | GitHub-профіль | Спринт 1 | Спринт 2 | Спринт 3 | Спринт 4 | Спринт 5 |
 | :--- | :--- | :-: | :-: | :-: | :-: | :-: |
-| **Любочка Вікторія** | [`@twixt-bit`](https://github.com/twixt-bit) | **КТ** | **ТА** | - | - | - |
-| **Коломоєць Ольга** | [`@foxic-1234`](https://github.com/foxic-1234) | **ТА** | **ІТ** | - | - | - |
-| **Шпилька Тимофій** | [`@white-cod`](https://github.com/white-cod) | **ІТ** | **СМ** | - | - | - |
-| **Мініцька Анастасія** | [`@anastminic-ipt28-ops`](https://github.com/anastminic-ipt28-ops) | **СМ** | **КТ** | - | - | - |
+| **Любочка Вікторія** | [`@twixt-bit`](https://github.com/twixt-bit) | **КТ** | **ТА** | **ІТ** | - | - |
+| **Коломоєць Ольга** | [`@foxic-1234`](https://github.com/foxic-1234) | **ТА** | **ІТ** | **СМ** | - | - |
+| **Шпилька Тимофій** | [`@white-cod`](https://github.com/white-cod) | **ІТ** | **СМ** | **КТ** | - | - |
+| **Мініцька Анастасія** | [`@anastminic-ipt28-ops`](https://github.com/anastminic-ipt28-ops) | **СМ** | **КТ** | **ТА** | - | - |
 
 ## 3. Поточні інкременти та навігація
 
@@ -37,7 +37,7 @@
 - **Таблиця розподілу задач:** [`sprint1/tasks.md`](sprint1/tasks.md)
 - **Протокол ретроспективи:** [`sprint1/retro.md`](sprint1/retro.md)
 
-### Спринт 2: «Аудит вимог і стратегія тестування» (Поточний)
+### Спринт 2: «Аудит вимог і стратегія тестування»
 - **Паспорт Спринту 2:** [`sprint2/README.md`](sprint2/README.md)
 - **Реєстр дефектів вимог (Excel):** [`sprint2/requirements-defects.xlsx`](sprint2/requirements-defects.xlsx)
 - **Реєстр дефектів вимог (Markdown):** [`sprint2/requirements-defects.md`](sprint2/requirements-defects.md)
@@ -45,6 +45,15 @@
 - **План тестування (Test Plan):** [`sprint2/test-plan.md`](sprint2/test-plan.md)
 - **Таблиця декомпозиції задач:** [`sprint2/tasks.md`](sprint2/tasks.md)
 - **Протокол ретроспективи:** [`sprint2/retro.md`](sprint2/retro.md)
+
+### Спринт 3: «Тест-кейси і дефекти» (Поточний)
+- **Паспорт Спринту 3 (статистика, покриття «вимога → TC»):** [`sprint3/README.md`](sprint3/README.md)
+- **Трекер дефектів:** [GitHub Issues з міткою `sprint:3`](https://github.com/white-cod/Software-Quality-Assurance-Technologies_Stuff-Plus/issues?q=label%3Asprint%3A3)
+- **Тест-кейси (Excel: Test cases, Coverage, Review):** [`sprint3/test-cases.xlsx`](sprint3/test-cases.xlsx) · [Markdown](sprint3/test-cases.md)
+- **Журнал виконання (Run 1, Environment):** [`sprint3/execution-log.xlsx`](sprint3/execution-log.xlsx)
+- **Звіти про дефекти:** [`sprint3/bug-reports.md`](sprint3/bug-reports.md) · вкладення [`sprint3/attachments/`](sprint3/attachments/)
+- **Таблиця розподілу задач:** [`sprint3/task-board.md`](sprint3/task-board.md)
+- **Протокол ретроспективи:** [`sprint3/retro.md`](sprint3/retro.md)
 
 ---
 
@@ -66,11 +75,20 @@
 │       ├── 01_leave_approval.drawio   # Модель 1: Подання й погодження відпустки (+ .png)
 │       ├── 02_timesheet.drawio        # Модель 2: Облік робочого часу (+ .png)
 │       └── 03_offboarding.drawio      # Модель 3: Звільнення співробітника (+ .png)
-└── sprint2/                           # Інкремент Спринту 2 (Досьє якості v2)
-    ├── README.md                      # Паспорт та навігатор Спринту 2
-    ├── requirements-defects.xlsx      # Реєстр 25 дефектів вимог (Excel)
-    ├── requirements-defects.md        # Реєстр дефектів вимог у Markdown
-    ├── SRS-1.1.md                     # Оновлена специфікація вимог з журналом змін
-    ├── test-plan.md                   # Стратегія тестування (7 рівнів, 16 типів)
-    ├── tasks.md                       # Таблиця декомпозиції 14 задач
-    └── retro.md                       # Протокол ретроспективи Start/Stop/Continue
+├── sprint2/                           # Інкремент Спринту 2 (Досьє якості v2)
+│   ├── README.md                      # Паспорт та навігатор Спринту 2
+│   ├── requirements-defects.xlsx      # Реєстр 25 дефектів вимог (Excel)
+│   ├── requirements-defects.md        # Реєстр дефектів вимог у Markdown
+│   ├── SRS-1.1.md                     # Оновлена специфікація вимог з журналом змін
+│   ├── test-plan.md                   # Стратегія тестування (7 рівнів, 16 типів)
+│   ├── tasks.md                       # Таблиця декомпозиції 14 задач
+│   └── retro.md                       # Протокол ретроспективи Start/Stop/Continue
+├── sprint3/                           # Інкремент Спринту 3 (Досьє якості v3)
+│   ├── README.md                      # Паспорт: трекер, статистика, покриття, DoD, сценарій Demo
+│   ├── test-cases.xlsx                # 50 тест-кейсів: Test cases, Coverage, Review (+ test-cases.md)
+│   ├── execution-log.xlsx             # Журнал виконання Run 1 і середовище
+│   ├── bug-reports.md                 # 12 звітів про дефекти (дзеркало GitHub Issues)
+│   ├── attachments/                   # Знімки екрана BUG-NNN-k.png
+│   ├── task-board.md                  # Таблиця розподілу задач
+│   └── retro.md                       # Протокол ретроспективи Start/Stop/Continue
+└── .github/ISSUE_TEMPLATE/bug_report.md  # Шаблон звіту про дефект для GitHub Issues
