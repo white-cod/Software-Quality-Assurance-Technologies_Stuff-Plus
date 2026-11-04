@@ -1,0 +1,242 @@
+{
+  "id": "0d20158b-9460-4d86-87c7-2a64bd7d73b4",
+  "version": "3.0",
+  "name": "personal",
+  "url": "http://www.google.com",
+  "urls": [
+    "http://www.google.com"
+  ],
+  "plugins": [],
+  "suites": [
+    {
+      "id": "e1cfd4d1-287f-47c1-9b74-d4b7b9a58c75",
+      "name": "New Suite",
+      "parallel": false,
+      "persistSession": false,
+      "tests": [
+        "e2961db4-4ead-4d5f-b8b4-e3387c6c5be9"
+      ],
+      "timeout": 30000
+    }
+  ],
+  "tests": [
+    {
+      "id": "e2961db4-4ead-4d5f-b8b4-e3387c6c5be9",
+      "name": "TC-002 Invalid credentials",
+      "commands": [
+        {
+          "id": "5b108e22-ac24-45fc-84a1-a98c42ab6974",
+          "command": "open",
+          "target": "https://opensource-demo.orangehrmlive.com/web/index.php/auth/login",
+          "value": ""
+        },
+        {
+          "command": "waitForElementVisible",
+          "target": "name=username",
+          "value": "20000",
+          "id": "0470366b-8c15-4dd5-a1a9-a58345f1df6a"
+        },
+        {
+          "command": "type",
+          "target": "name=username",
+          "value": "Admin",
+          "id": "7f1ce605-e86f-4eec-93f6-2a9453aa624e",
+          "comment": ""
+        },
+        {
+          "command": "type",
+          "target": "name=password",
+          "value": "WrongPass1",
+          "id": "bc23b7dc-0804-4805-b607-929d7fa5641e"
+        },
+        {
+          "command": "click",
+          "target": "css=button[type='submit']",
+          "value": "",
+          "id": "daec13c1-84dc-4021-bb7b-d25d81c06b1d"
+        },
+        {
+          "command": "waitForElementVisible",
+          "target": "css=.oxd-alert-content-text",
+          "value": "20000",
+          "id": "edb335b5-75d9-47f7-866f-a1ba0acd0416"
+        },
+        {
+          "command": "assertText",
+          "target": "css=.oxd-alert-content-text",
+          "value": "Invalid credentials",
+          "id": "bd119117-4eb0-41f8-9c27-5038c65611ff"
+        },
+        {
+          "command": "verifyElementPresent",
+          "target": "name=username",
+          "value": "",
+          "id": "968841b6-d30a-472b-a4d3-fbf92c7c4ebb"
+        },
+        {
+          "command": "type",
+          "target": "name=username",
+          "value": "Admin",
+          "id": "3f2364ad-8de4-47fd-887c-f3f770447e24"
+        },
+        {
+          "command": "type",
+          "target": "name=password",
+          "value": "admin123",
+          "id": "edad6983-60bb-4773-a431-86907784e824"
+        },
+        {
+          "command": "click",
+          "target": "css=button[type='submit']",
+          "value": "",
+          "id": "3a5d0d28-73b6-41db-b555-7ab165f069a2"
+        },
+        {
+          "command": "waitForElementVisible",
+          "target": "css=h6.oxd-topbar-header-breadcrumb-module",
+          "value": "20000",
+          "id": "ded454bc-1a2d-4682-9cd5-576b9802c6cd"
+        },
+        {
+          "command": "assertText",
+          "target": "css=h6.oxd-topbar-header-breadcrumb-module",
+          "value": "Dashboard",
+          "id": "679d7783-2a7a-4754-90a5-a6ee51599e0f"
+        },
+        {
+          "command": "verifyElementNotPresent",
+          "target": "css=.oxd-alert-content-text",
+          "value": "",
+          "id": "e3469da4-eaf8-40f0-b2de-bf03962ca490"
+        },
+        {
+          "command": "click",
+          "target": "css=.oxd-userdropdown-tab",
+          "value": "",
+          "id": "18cc23a4-d3e3-431f-a191-0e54dada71c0"
+        },
+        {
+          "command": "waitForElementVisible",
+          "target": "css=a[href$='/auth/logout']",
+          "value": "10000",
+          "id": "86a14426-35e4-4b4f-84b2-d8d9952408c1"
+        },
+        {
+          "command": "click",
+          "target": "css=a[href$='/auth/logout']",
+          "value": "",
+          "id": "62c4197e-f0c6-4980-b590-a8dca952dd7b"
+        },
+        {
+          "command": "waitForElementVisible",
+          "target": "name=username",
+          "value": "20000",
+          "id": "d7e1c7d0-4692-44cc-9b6e-fe7e319ba6dd"
+        }
+      ]
+    },
+    {
+      "id": "87a1a940-2f1d-46a2-9b8d-20caba0caa33",
+      "name": "TC-006 Menu search",
+      "commands": [
+        {
+          "id": "a7592dfc-fa8a-446e-81f2-0b389d92f393",
+          "command": "open",
+          "target": "https://opensource-demo.orangehrmlive.com/web/index.php/auth/login",
+          "value": ""
+        },
+        {
+          "command": "waitForElementVisible",
+          "target": "name=username",
+          "value": "20000",
+          "id": "f562b63e-38ba-4a62-b108-c73bbd93c764"
+        },
+        {
+          "command": "type",
+          "target": "name=username",
+          "value": "Admin",
+          "id": "cda75d22-2860-48c4-a250-eed04f226baf"
+        },
+        {
+          "command": "type",
+          "target": "name=password",
+          "value": "admin123",
+          "id": "28f007bf-51f9-4350-900e-4315fd137578"
+        },
+        {
+          "command": "click",
+          "target": "css=button[type='submit']",
+          "value": "",
+          "id": "a036aab2-fd46-4425-b951-28df7da7eff4"
+        },
+        {
+          "command": "waitForElementVisible",
+          "target": "css=.oxd-main-menu-search input",
+          "value": "20000",
+          "id": "376964ae-b20b-4686-a0cc-15538a679e05"
+        },
+        {
+          "command": "verifyElementPresent",
+          "target": "xpath=//span[contains(@class,'oxd-main-menu-item--name')][text()='Buzz']",
+          "value": "",
+          "id": "23c5cbbb-1808-4ffd-b2da-cd1fbc7f7b92"
+        },
+        {
+          "command": "type",
+          "target": "css=.oxd-main-menu-search input",
+          "value": "Lea",
+          "id": "d618ff02-6965-4738-a041-e8b32ef45a2e"
+        },
+        {
+          "command": "waitForElementNotPresent",
+          "target": "xpath=//span[contains(@class,'oxd-main-menu-item--name')][text()='Admin']",
+          "value": "10000",
+          "id": "04047cda-179d-4da2-9aae-c7a80de561eb"
+        },
+        {
+          "command": "assertElementPresent",
+          "target": "xpath=//span[contains(@class,'oxd-main-menu-item--name')][text()='Leave']",
+          "value": "",
+          "id": "60aeeea8-961c-417c-afa0-d299076d6878"
+        },
+        {
+          "command": "verifyElementNotPresent",
+          "target": "xpath=//span[contains(@class,'oxd-main-menu-item--name')][text()='PIM']",
+          "value": "",
+          "id": "da6d1817-0d65-4ff9-8719-3ddf545f8ffa"
+        },
+        {
+          "command": "click",
+          "target": "css=.oxd-userdropdown-tab",
+          "value": "",
+          "id": "f80916c4-04aa-44c4-bc91-224a720b8c1a"
+        },
+        {
+          "command": "waitForElementVisible",
+          "target": "css=a[href$='/auth/logout']",
+          "value": "10000",
+          "id": "469b0dd0-3d70-4a8b-984f-e6fe1390061c"
+        },
+        {
+          "command": "click",
+          "target": "css=a[href$='/auth/logout']",
+          "value": "",
+          "id": "84da966b-10d5-4cc0-8dc9-b3b170d5abb5"
+        },
+        {
+          "command": "waitForElementVisible",
+          "target": "name=username",
+          "value": "20000",
+          "id": "762fbf11-9cd9-4f32-862a-2697bfb0856d"
+        }
+      ]
+    }
+  ],
+  "snapshot": {
+    "dependencies": {},
+    "tests": [],
+    "jest": {
+      "extraGlobals": []
+    }
+  }
+}
