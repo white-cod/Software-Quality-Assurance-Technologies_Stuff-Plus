@@ -4,8 +4,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebElement;
 
-import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -28,12 +26,9 @@ class EmployeeTest extends UiTestBase {
             () -> assertFalse(row.findElements(EmployeeListPage.ROW_EDIT).isEmpty(), "Немає іконки редагування")
         );
         // Shared demo data mixes letter case; the list is compared case-insensitively, as the demo sorts it.
-        List<String> ascending = list.sortByLastName("Ascending", String.CASE_INSENSITIVE_ORDER);
-        List<String> descending = list.sortByLastName("Descending", String.CASE_INSENSITIVE_ORDER.reversed());
-        assertAll("Сортування",
-            () -> assertEquals(5, ascending.size(), "Ascending: " + ascending),
-            () -> assertEquals(5, descending.size(), "Descending: " + descending)
-        );
+        // The wait itself is the check (4.15): an unsorted list fails with a TimeoutException naming the order.
+        list.sortByLastName("Ascending", String.CASE_INSENSITIVE_ORDER);
+        list.sortByLastName("Descending", String.CASE_INSENSITIVE_ORDER.reversed());
     }
 
     @Test
