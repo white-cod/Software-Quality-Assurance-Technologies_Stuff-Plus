@@ -9,7 +9,6 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /** UI-тести входу: тест-кейси TC-001, TC-002, TC-004 спринта 3 (вимоги F-10, F-20, GUI-10). */
@@ -73,6 +72,7 @@ class LoginTest extends UiTestBase {
         );
         login.typePassword(LoginPage.ADMIN_PASSWORD);
         wait.until(ExpectedConditions.attributeToBe(LoginPage.PASSWORD, "value", LoginPage.ADMIN_PASSWORD));
-        assertFalse(driver.findElement(LoginPage.PASSWORD).getText().contains(LoginPage.ADMIN_PASSWORD));
+        assertEquals("password", driver.findElement(LoginPage.PASSWORD).getAttribute("type"),
+                "Після введення пароль показано відкритим текстом");
     }
 }
