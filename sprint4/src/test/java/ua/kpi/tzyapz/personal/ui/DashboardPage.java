@@ -49,11 +49,8 @@ class DashboardPage {
     }
 
     List<String> clearMenuSearch(int expectedCount) {
-        WebElement search = driver.findElement(MENU_SEARCH);
-        // clear() does not fire Vue's input event, so the text is removed key by key.
-        while (!search.getAttribute("value").isEmpty()) {
-            search.sendKeys(Keys.BACK_SPACE);
-        }
+        // clear() does not fire Vue's input event, so the text is selected and deleted from the keyboard.
+        driver.findElement(MENU_SEARCH).sendKeys(Keys.chord(Keys.CONTROL, "a"), Keys.BACK_SPACE);
         return texts(wait.until(ExpectedConditions.numberOfElementsToBe(MENU_ITEMS, expectedCount)));
     }
 
