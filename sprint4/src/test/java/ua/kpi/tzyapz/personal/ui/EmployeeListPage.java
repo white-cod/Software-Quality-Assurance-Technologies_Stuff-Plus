@@ -55,7 +55,8 @@ class EmployeeListPage {
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath(LAST_NAME_HEADER
                 + "//li[contains(@class,'oxd-table-header-sort-dropdown-item')][normalize-space(.)='" + order + "']"))).click();
         // Wait for the state under test: the table re-renders after the request completes.
-        return wait.until(d -> {
+        return new WebDriverWait(driver, UiTestBase.TIMEOUT)
+                .withMessage("Перші 5 прізвищ не впорядковано (" + order + ")").until(d -> {
             List<String> names = firstLastNames(5);
             return names.size() == 5 && names.equals(names.stream().sorted(expectedOrder).toList()) ? names : null;
         });
