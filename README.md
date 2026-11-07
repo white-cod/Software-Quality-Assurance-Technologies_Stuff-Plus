@@ -21,10 +21,10 @@
 
 | Член команди | GitHub-профіль | Спринт 1 | Спринт 2 | Спринт 3 | Спринт 4 | Спринт 5 |
 | :--- | :--- | :-: | :-: | :-: | :-: | :-: |
-| **Любочка Вікторія** | [`@twixt-bit`](https://github.com/twixt-bit) | **КТ** | **ТА** | **ІТ** | - | - |
-| **Коломоєць Ольга** | [`@foxic-1234`](https://github.com/foxic-1234) | **ТА** | **ІТ** | **СМ** | - | - |
-| **Шпилька Тимофій** | [`@white-cod`](https://github.com/white-cod) | **ІТ** | **СМ** | **КТ** | - | - |
-| **Мініцька Анастасія** | [`@anastminic-ipt28-ops`](https://github.com/anastminic-ipt28-ops) | **СМ** | **КТ** | **ТА** | - | - |
+| **Любочка Вікторія** | [`@twixt-bit`](https://github.com/twixt-bit) | **КТ** | **ТА** | **ІТ** | **СМ** | - |
+| **Коломоєць Ольга** | [`@foxic-1234`](https://github.com/foxic-1234) | **ТА** | **ІТ** | **СМ** | **КТ** | - |
+| **Шпилька Тимофій** | [`@white-cod`](https://github.com/white-cod) | **ІТ** | **СМ** | **КТ** | **ТА** | - |
+| **Мініцька Анастасія** | [`@anastminic-ipt28-ops`](https://github.com/anastminic-ipt28-ops) | **СМ** | **КТ** | **ТА** | **ІТ** | - |
 
 ## 3. Поточні інкременти та навігація
 
@@ -46,7 +46,7 @@
 - **Таблиця декомпозиції задач:** [`sprint2/tasks.md`](sprint2/tasks.md)
 - **Протокол ретроспективи:** [`sprint2/retro.md`](sprint2/retro.md)
 
-### Спринт 3: «Тест-кейси і дефекти» (Поточний)
+### Спринт 3: «Тест-кейси і дефекти»
 - **Паспорт Спринту 3 (статистика, покриття «вимога → TC»):** [`sprint3/README.md`](sprint3/README.md)
 - **Трекер дефектів:** [GitHub Issues з міткою `sprint:3`](https://github.com/white-cod/Software-Quality-Assurance-Technologies_Stuff-Plus/issues?q=label%3Asprint%3A3)
 - **Тест-кейси (Excel: Test cases, Coverage, Review):** [`sprint3/test-cases.xlsx`](sprint3/test-cases.xlsx) · [Markdown](sprint3/test-cases.md)
@@ -54,6 +54,18 @@
 - **Звіти про дефекти:** [`sprint3/bug-reports.md`](sprint3/bug-reports.md) · вкладення [`sprint3/attachments/`](sprint3/attachments/)
 - **Таблиця розподілу задач:** [`sprint3/task-board.md`](sprint3/task-board.md)
 - **Протокол ретроспективи:** [`sprint3/retro.md`](sprint3/retro.md)
+
+### Спринт 4: «Автоматизація: JUnit 5 і Selenium WebDriver» (Поточний)
+- **Репозиторій автотестів і розділ досьє «Автоматизація» (збірка, запуск, автори тестів):** [`sprint4/README.md`](sprint4/README.md)
+- **Запуск:** `cd sprint4` → `mvn clean test` (юніт) · `mvn clean test -DexcludedGroups=none` (юніт + UI)
+- **Протокол запуску (Surefire):** [`sprint4/docs/surefire-summary.md`](sprint4/docs/surefire-summary.md)
+- **Матриця покриття «BL → правило → тести → рецензент»:** [`sprint4/docs/coverage-matrix.md`](sprint4/docs/coverage-matrix.md)
+- **UI-сценарії (TC → кроки, локатори, тест-метод):** [`sprint4/docs/ui-scenarios.md`](sprint4/docs/ui-scenarios.md)
+- **Дефекти модуля v1:** [GitHub Issues з міткою `module`](https://github.com/white-cod/Software-Quality-Assurance-Technologies_Stuff-Plus/issues?q=label%3Amodule) · дзеркало [`sprint4/docs/module-defects.md`](sprint4/docs/module-defects.md)
+- **Code review за чек-листом 5.3:** [`sprint4/docs/code-review.md`](sprint4/docs/code-review.md)
+- **Selenium IDE:** [`sprint4/selenium-ide/`](sprint4/selenium-ide/)
+- **Таблиця розподілу задач:** [`sprint4/task-board.md`](sprint4/task-board.md)
+- **Протокол ретроспективи:** [`sprint4/retro.md`](sprint4/retro.md)
 
 ---
 
@@ -91,4 +103,13 @@
 │   ├── attachments/                   # Знімки екрана BUG-NNN-k.png
 │   ├── task-board.md                  # Таблиця розподілу задач
 │   └── retro.md                       # Протокол ретроспективи Start/Stop/Continue
-└── .github/ISSUE_TEMPLATE/bug_report.md  # Шаблон звіту про дефект для GitHub Issues
+├── sprint4/                           # Інкремент Спринту 4 (Досьє якості v4) — Maven-проєкт автотестів
+│   ├── README.md                      # Збірка і запуск, ролі, розділ досьє «Автоматизація»
+│   ├── pom.xml                        # JDK 17, JUnit 5.10, Selenium 4.21, Surefire (тег ui виключено)
+│   ├── docs/                          # Матриця покриття, UI-сценарії, протокол Surefire, дефекти модуля, code review
+│   ├── selenium-ide/                  # Проєкт Selenium IDE (*.side) і експорт Java JUnit
+│   ├── src/main/java/…/personal/      # Модуль бізнес-логіки v1 (без змін)
+│   ├── src/test/java/…/personal/      # Юніт-тести JUnit 5; ui/ — WebDriver-тести і Page Object
+│   ├── task-board.md                  # Таблиця розподілу задач
+│   └── retro.md                       # Протокол ретроспективи Start/Stop/Continue
+└── .github/ISSUE_TEMPLATE/            # Шаблони issues: bug_report.md (demo, С3), module_bug_report.md (модуль, С4)
