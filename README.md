@@ -21,10 +21,10 @@
 
 | Член команди | GitHub-профіль | Спринт 1 | Спринт 2 | Спринт 3 | Спринт 4 | Спринт 5 |
 | :--- | :--- | :-: | :-: | :-: | :-: | :-: |
-| **Любочка Вікторія** | [`@twixt-bit`](https://github.com/twixt-bit) | **КТ** | **ТА** | **ІТ** | **СМ** | - |
-| **Коломоєць Ольга** | [`@foxic-1234`](https://github.com/foxic-1234) | **ТА** | **ІТ** | **СМ** | **КТ** | - |
-| **Шпилька Тимофій** | [`@white-cod`](https://github.com/white-cod) | **ІТ** | **СМ** | **КТ** | **ТА** | - |
-| **Мініцька Анастасія** | [`@anastminic-ipt28-ops`](https://github.com/anastminic-ipt28-ops) | **СМ** | **КТ** | **ТА** | **ІТ** | - |
+| **Любочка Вікторія** | [`@twixt-bit`](https://github.com/twixt-bit) | **КТ** | **ТА** | **ІТ** | **СМ** | **КТ** |
+| **Коломоєць Ольга** | [`@foxic-1234`](https://github.com/foxic-1234) | **ТА** | **ІТ** | **СМ** | **КТ** | **ТА** |
+| **Шпилька Тимофій** | [`@white-cod`](https://github.com/white-cod) | **ІТ** | **СМ** | **КТ** | **ТА** | **ІТ** |
+| **Мініцька Анастасія** | [`@anastminic-ipt28-ops`](https://github.com/anastminic-ipt28-ops) | **СМ** | **КТ** | **ТА** | **ІТ** | **СМ** |
 
 ## 3. Поточні інкременти та навігація
 
@@ -55,7 +55,7 @@
 - **Таблиця розподілу задач:** [`sprint3/task-board.md`](sprint3/task-board.md)
 - **Протокол ретроспективи:** [`sprint3/retro.md`](sprint3/retro.md)
 
-### Спринт 4: «Автоматизація: JUnit 5 і Selenium WebDriver» (Поточний)
+### Спринт 4: «Автоматизація: JUnit 5 і Selenium WebDriver»
 - **Репозиторій автотестів і розділ досьє «Автоматизація» (збірка, запуск, автори тестів):** [`sprint4/README.md`](sprint4/README.md)
 - **Запуск:** `cd sprint4` → `mvn clean test` (юніт) · `mvn clean test -DexcludedGroups=none` (юніт + UI)
 - **Протокол запуску (Surefire):** [`sprint4/docs/surefire-summary.md`](sprint4/docs/surefire-summary.md)
@@ -66,6 +66,16 @@
 - **Selenium IDE:** [`sprint4/selenium-ide/`](sprint4/selenium-ide/)
 - **Таблиця розподілу задач:** [`sprint4/task-board.md`](sprint4/task-board.md)
 - **Протокол ретроспективи:** [`sprint4/retro.md`](sprint4/retro.md)
+
+### Спринт 5: «Регресія і звіт про якість» (Поточний)
+- **Паспорт Спринту 5 (результат регресії, рішення no-go):** [`sprint5/README.md`](sprint5/README.md)
+- **Звіт про якість продукту:** [`sprint5/quality-report.pdf`](sprint5/quality-report.pdf) · [DOCX](sprint5/quality-report.docx)
+- **План регресії і критерії go / no-go:** [`sprint5/regression-plan.md`](sprint5/regression-plan.md)
+- **Журнал регресії v1 → v2:** [`sprint5/regression-log.xlsx`](sprint5/regression-log.xlsx) · Surefire [`v1`](sprint5/surefire-v1/) / [`v2`](sprint5/surefire-v2/)
+- **Матриця простежуваності:** [`sprint5/traceability-matrix.xlsx`](sprint5/traceability-matrix.xlsx)
+- **Регресійний дефект BUG-019:** [`sprint5/defects-regression.md`](sprint5/defects-regression.md)
+- **Презентація захисту:** [`sprint5/presentation.pdf`](sprint5/presentation.pdf)
+- **Рецензія звіту · задачі · ретро семестру:** [`review-checklist.md`](sprint5/review-checklist.md) · [`tasks.md`](sprint5/tasks.md) · [`retro-semester.md`](sprint5/retro-semester.md)
 
 ---
 
@@ -112,4 +122,14 @@
 │   ├── src/test/java/…/personal/      # Юніт-тести JUnit 5; ui/ — WebDriver-тести і Page Object
 │   ├── task-board.md                  # Таблиця розподілу задач
 │   └── retro.md                       # Протокол ретроспективи Start/Stop/Continue
+├── sprint5/                           # Інкремент Спринту 5 (Досьє якості v5) — регресія v2 і звіт про якість
+│   ├── README.md                      # Паспорт: результат регресії, рішення no-go
+│   ├── regression-plan.md             # План регресії, критерії go / no-go (до прогону)
+│   ├── regression-log.xlsx            # Журнал регресії v1 → v2 (82 кейси)
+│   ├── traceability-matrix.xlsx       # Матриця «вимоги × кейси × автотести × дефекти»
+│   ├── surefire-v1/, surefire-v2/     # Звіти Surefire обох версій модуля
+│   ├── defects-regression.md          # Регресійний дефект BUG-019
+│   ├── quality-report.docx / .pdf     # Звіт про якість продукту (9 розділів)
+│   ├── presentation.pdf               # 10 слайдів захисту
+│   └── review-checklist.md, retro-semester.md, tasks.md
 └── .github/ISSUE_TEMPLATE/            # Шаблони issues: bug_report.md (demo, С3), module_bug_report.md (модуль, С4)
